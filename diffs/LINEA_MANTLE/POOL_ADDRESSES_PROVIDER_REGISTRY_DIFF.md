@@ -1,0 +1,7 @@
+```diff
+diff --git a/./downloads/LINEA/POOL_ADDRESSES_PROVIDER_REGISTRY.sol b/./downloads/MANTLE/POOL_ADDRESSES_PROVIDER_REGISTRY.sol
+index e7d734f..1b8260f 100644
+--- a/./downloads/LINEA/POOL_ADDRESSES_PROVIDER_REGISTRY.sol
++++ b/./downloads/MANTLE/POOL_ADDRESSES_PROVIDER_REGISTRY.sol
+
+```

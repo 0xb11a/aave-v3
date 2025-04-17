@@ -1,0 +1,7 @@
+```diff
+diff --git a/./downloads/LINEA/DEFAULT_VARIABLE_DEBT_TOKEN_IMPL.sol b/./downloads/MANTLE/DEFAULT_VARIABLE_DEBT_TOKEN_IMPL.sol
+index 5e2801e..5c60877 100644
+--- a/./downloads/LINEA/DEFAULT_VARIABLE_DEBT_TOKEN_IMPL.sol
++++ b/./downloads/MANTLE/DEFAULT_VARIABLE_DEBT_TOKEN_IMPL.sol
+
+```
