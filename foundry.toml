@@ -30,5 +30,5 @@ evm_version = 'london'
 mantle = "${RPC_MANTLE}"
 
 [etherscan]
-mantle = { key = "${ETHERSCAN_API_KEY_MANTLE}", chainId = "mantle" }
+mantle = { key = "${ETHERSCAN_API_KEY_MANTLE}", chainId = 5000 }
 # See more config options https://github.com/gakonst/foundry/tree/master/config
