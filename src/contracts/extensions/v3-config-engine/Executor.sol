@@ -5,7 +5,6 @@ import {Ownable} from '../../dependencies/openzeppelin/contracts/Ownable.sol';
 
 /**
  * @title Executor
- * @author BGD Labs
  * @notice this contract contains the logic to execute a payload.
  * @dev Same code for all Executor levels.
  */
