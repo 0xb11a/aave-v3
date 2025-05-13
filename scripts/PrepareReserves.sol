@@ -9,7 +9,7 @@ contract PrepareReserves is Script {
     function getEncodedArgs() public pure returns (bytes memory) {
         IAaveV3ConfigEngine.PoolContext memory context = IAaveV3ConfigEngine.PoolContext({
             networkName: "Mantle",
-            networkAbbreviation: "Mntl"
+            networkAbbreviation: "mnt"
         });
 
         IAaveV3ConfigEngine.Listing[] memory listings = new IAaveV3ConfigEngine.Listing[](2); // change array size based on number of assets
