@@ -16,15 +16,30 @@ contract DefaultMarketInput is MarketInput {
       MarketReport memory deployedContracts
     )
   {
-    roles.marketOwner = deployer;
-    roles.emergencyAdmin = deployer;
-    roles.poolAdmin = deployer;
+    roles = Roles(
+      deployer,
+      deployer,
+      deployer
+    );
 
-    config.marketId = 'Aave V3 Testnet Market';
-    config.providerId = 8080;
-    config.oracleDecimals = 8;
-    config.flashLoanPremiumTotal = 0.0005e4;
-    config.flashLoanPremiumToProtocol = 0.0004e4;
+    config = MarketConfig(
+      0x5bc7Cf88EB131DB18b5d7930e793095140799aD5,
+      0xD97F20bEbeD74e8144134C4b148fE93417dd0F96,
+      'Lendle Testnet Market',
+      8,
+      address(0), // ParaswapAugustusRegistry
+      address(0), // l2SequencerUptimeFeed
+      0, // l2PriceOracleSentinelGracePeriod
+      8080,
+      0x0,
+      0x78c1b0C915c4FAA5FffA6CAbf0219DA63d7f4cb8, // WMNT
+      0.0005e4,
+      0.0004e4,
+      address(0),
+      address(0),
+      address(0),
+      0
+    );
 
     return (roles, config, flags, deployedContracts);
   }

@@ -8,7 +8,6 @@ out/
 .assets
 
 # artifacts
-reports/
 diffs/
 downloads/
 
