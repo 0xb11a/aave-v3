@@ -16,3 +16,20 @@ abstract contract MarketInput {
       MarketReport memory deployedContracts
     );
 }
+
+abstract contract MarketInputV2 {
+  function _getMarketInput(
+      address,
+      string memory,
+      uint256
+    )
+      internal
+      pure
+      virtual
+      returns (
+        Roles memory roles,
+        MarketConfig memory config,
+        DeployFlags memory flags,
+        MarketReport memory deployedContracts
+      );
+}

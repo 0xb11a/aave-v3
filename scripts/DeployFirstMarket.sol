@@ -5,4 +5,4 @@ import {DeployAaveV3MarketBatchedBase} from './misc/DeployAaveV3MarketBatchedBas
 
 import {DefaultMarketInput} from '../src/deployments/inputs/DefaultMarketInput.sol';
 
-contract Default is DeployAaveV3MarketBatchedBase, DefaultMarketInput {}
+contract DeployFirstMarket is DeployAaveV3MarketBatchedBase, DefaultMarketInput {}
