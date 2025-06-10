@@ -3,14 +3,14 @@ pragma solidity ^0.8.0;
 
 import {Address} from 'openzeppelin-contracts/contracts/utils/Address.sol';
 import {WadRayMath} from '../../protocol/libraries/math/WadRayMath.sol';
-import {IAaveV3ConfigEngine as IEngine} from './IAaveV3ConfigEngine.sol';
+import {ConfigEngine as IEngine} from './ConfigEngine.sol';
 import {EngineFlags} from './EngineFlags.sol';
 
 /**
  * @dev Base smart contract for an Aave v3.0.1 configs update.
  * - !!!IMPORTANT!!! This payload inheriting AaveV3Payload MUST BE STATELESS always
  * - Assumes this contract has the right permissions
- * - Connected to a IAaveV3ConfigEngine engine contact, which abstract the complexities of
+ * - Connected to a ConfigEngine engine contact, which abstract the complexities of
  *   interaction with the Aave protocol.
  * - At the moment covering:
  *   - Listings of new assets on the pool.

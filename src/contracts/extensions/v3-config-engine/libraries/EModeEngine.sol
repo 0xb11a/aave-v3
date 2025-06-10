@@ -5,7 +5,7 @@ import {SafeCast} from 'openzeppelin-contracts/contracts/utils/math/SafeCast.sol
 import {EngineFlags} from '../EngineFlags.sol';
 import {DataTypes} from '../../../protocol/libraries/types/DataTypes.sol';
 import {PercentageMath} from '../../../protocol/libraries/math/PercentageMath.sol';
-import {IAaveV3ConfigEngine as IEngine, IPoolConfigurator, IPool} from '../IAaveV3ConfigEngine.sol';
+import {IConfigEngine as IEngine, IPoolConfigurator, IPool} from '../IConfigEngine.sol';
 
 library EModeEngine {
   using PercentageMath for uint256;

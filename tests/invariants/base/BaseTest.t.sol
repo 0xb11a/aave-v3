@@ -186,7 +186,7 @@ abstract contract BaseTest is BaseStorage, PropertiesConstants, StdAsserts, StdU
     address asset,
     uint256 balance
   ) internal view returns (uint256) {
-    uint256 assetPrice = contracts.aaveOracle.getAssetPrice(asset);
+    uint256 assetPrice = contracts.oracle.getAssetPrice(asset);
     uint256 assetUnit = 10 ** IERC20(asset).decimals();
     return (balance * assetPrice) / assetUnit;
   }

@@ -2,9 +2,9 @@
 pragma solidity ^0.8.0;
 
 import 'forge-std/Test.sol';
-import {AaveOracle} from '../../src/contracts/misc/AaveOracle.sol';
+import {Oracle} from '../../src/contracts/misc/Oracle.sol';
 import {WrappedTokenGatewayV3} from '../../src/contracts/helpers/WrappedTokenGatewayV3.sol';
-import {AaveProtocolDataProvider} from '../../src/contracts/helpers/AaveProtocolDataProvider.sol';
+import {ProtocolDataProvider} from '../../src/contracts/helpers/ProtocolDataProvider.sol';
 import {AToken} from '../../src/contracts/protocol/tokenization/AToken.sol';
 import {VariableDebtToken} from '../../src/contracts/protocol/tokenization/VariableDebtToken.sol';
 import {DataTypes} from '../../src/contracts/protocol/libraries/types/DataTypes.sol';
@@ -41,7 +41,7 @@ contract WrappedTokenGatewayTests is TestnetProcedures {
     bool useATokens
   );
 
-  AaveOracle internal aaveOracle;
+  Oracle internal oracle;
   WrappedTokenGatewayV3 internal wrappedTokenGatewayV3;
 
   AToken internal aWEth;
@@ -58,13 +58,13 @@ contract WrappedTokenGatewayTests is TestnetProcedures {
     vm.deal(alice, 100e18);
     vm.deal(bob, 100e18);
 
-    aaveOracle = AaveOracle(report.aaveOracle);
+    oracle = Oracle(report.oracle);
     assertTrue(
       report.wrappedTokenGateway != address(0),
       'WrappedTokenGateway missing at deployment'
     );
     wrappedTokenGatewayV3 = WrappedTokenGatewayV3(payable(report.wrappedTokenGateway));
-    contracts.protocolDataProvider = AaveProtocolDataProvider(report.protocolDataProvider);
+    contracts.protocolDataProvider = ProtocolDataProvider(report.protocolDataProvider);
     (address aWEthAddr, , address wEthVariableDebt) = contracts
       .protocolDataProvider
       .getReserveTokensAddresses(tokenList.weth);

@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import 'forge-std/Test.sol';
 import {VmSafe} from 'forge-std/Base.sol';
-import {IAaveV3ConfigEngine} from '../../../src/contracts/extensions/v3-config-engine/IAaveV3ConfigEngine.sol';
+import {ConfigEngine} from '../../../src/contracts/extensions/v3-config-engine/ConfigEngine.sol';
 import {AaveV3MockListing} from './mocks/AaveV3MockListing.sol';
 import {AaveV3MockListingCustom} from './mocks/AaveV3MockListingCustom.sol';
 import {AaveV3MockCapUpdate} from './mocks/AaveV3MockCapUpdate.sol';
@@ -21,14 +21,14 @@ import {AaveV3MockAssetEModeUpdate} from './mocks/AaveV3MockAssetEModeUpdate.sol
 import {ATokenInstance} from '../../../src/contracts/instances/ATokenInstance.sol';
 import {EModeConfiguration} from '../../../src/contracts/protocol/libraries/configuration/EModeConfiguration.sol';
 import {VariableDebtTokenInstance} from '../../../src/contracts/instances/VariableDebtTokenInstance.sol';
-import {TestnetProcedures, AaveV3ConfigEngine} from '../../utils/TestnetProcedures.sol';
+import {TestnetProcedures, ConfigEngine} from '../../utils/TestnetProcedures.sol';
 import {TestnetERC20} from '../../../src/contracts/mocks/testnet-helpers/TestnetERC20.sol';
 import {MockAggregator} from '../../../src/contracts/mocks/oracle/CLAggregators/MockAggregator.sol';
 import {IPool, IPoolAddressesProvider} from '../../utils/ProtocolV3TestBase.sol';
 import {DataTypes} from '../../../src/contracts/protocol/libraries/types/DataTypes.sol';
 import {ProtocolV3TestBase, IDefaultInterestRateStrategyV2, ReserveConfig, ReserveTokens} from '../../utils/ProtocolV3TestBase.sol';
 
-contract AaveV3ConfigEngineTest is TestnetProcedures, ProtocolV3TestBase {
+contract ConfigEngineTest is TestnetProcedures, ProtocolV3TestBase {
   using stdStorage for StdStorage;
   address configEngine;
 
@@ -89,7 +89,7 @@ contract AaveV3ConfigEngineTest is TestnetProcedures, ProtocolV3TestBase {
       reserveFactor: 10_00,
       usageAsCollateralEnabled: true,
       borrowingEnabled: true,
-      interestRateStrategy: AaveV3ConfigEngine(configEngine).DEFAULT_INTEREST_RATE_STRATEGY(),
+      interestRateStrategy: ConfigEngine(configEngine).DEFAULT_INTEREST_RATE_STRATEGY(),
       isPaused: false,
       isActive: true,
       isFrozen: false,
@@ -125,7 +125,7 @@ contract AaveV3ConfigEngineTest is TestnetProcedures, ProtocolV3TestBase {
     _validateInterestRateStrategy(
       asset,
       contracts.protocolDataProvider.getInterestRateStrategyAddress(asset),
-      AaveV3ConfigEngine(configEngine).DEFAULT_INTEREST_RATE_STRATEGY(),
+      ConfigEngine(configEngine).DEFAULT_INTEREST_RATE_STRATEGY(),
       IDefaultInterestRateStrategyV2.InterestRateDataRay({
         optimalUsageRatio: _bpsToRay(payload.newListings()[0].rateStrategyParams.optimalUsageRatio),
         baseVariableBorrowRate: _bpsToRay(
@@ -186,7 +186,7 @@ contract AaveV3ConfigEngineTest is TestnetProcedures, ProtocolV3TestBase {
       reserveFactor: 10_00,
       usageAsCollateralEnabled: true,
       borrowingEnabled: true,
-      interestRateStrategy: AaveV3ConfigEngine(configEngine).DEFAULT_INTEREST_RATE_STRATEGY(),
+      interestRateStrategy: ConfigEngine(configEngine).DEFAULT_INTEREST_RATE_STRATEGY(),
       isPaused: false,
       isActive: true,
       isFrozen: false,
@@ -219,7 +219,7 @@ contract AaveV3ConfigEngineTest is TestnetProcedures, ProtocolV3TestBase {
     _validateInterestRateStrategy(
       asset,
       contracts.protocolDataProvider.getInterestRateStrategyAddress(asset),
-      AaveV3ConfigEngine(configEngine).DEFAULT_INTEREST_RATE_STRATEGY(),
+      ConfigEngine(configEngine).DEFAULT_INTEREST_RATE_STRATEGY(),
       IDefaultInterestRateStrategyV2.InterestRateDataRay({
         optimalUsageRatio: _bpsToRay(
           payload.newListingsCustom()[0].base.rateStrategyParams.optimalUsageRatio
@@ -472,7 +472,7 @@ contract AaveV3ConfigEngineTest is TestnetProcedures, ProtocolV3TestBase {
     _validateInterestRateStrategy(
       asset,
       contracts.protocolDataProvider.getInterestRateStrategyAddress(asset),
-      AaveV3ConfigEngine(configEngine).DEFAULT_INTEREST_RATE_STRATEGY(),
+      ConfigEngine(configEngine).DEFAULT_INTEREST_RATE_STRATEGY(),
       IDefaultInterestRateStrategyV2.InterestRateDataRay({
         optimalUsageRatio: _bpsToRay(payload.rateStrategiesUpdates()[0].params.optimalUsageRatio),
         baseVariableBorrowRate: _bpsToRay(

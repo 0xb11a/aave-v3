@@ -118,7 +118,7 @@ contract PoolOperations_gas_Tests is Testhelpers {
   function test_liquidationCall_partial() external {
     // on v3.3 the amounts need to be adjusted to not cause error 103 (min leftover) issues
     uint256 scalingFactor = 10;
-    uint256 price = contracts.aaveOracle.getAssetPrice(tokenList.weth);
+    uint256 price = contracts.oracle.getAssetPrice(tokenList.weth);
     _supplyOnReserve(
       borrower,
       ((((price * 1e6) / 1e8) * 90) / 100) * scalingFactor,
@@ -136,7 +136,7 @@ contract PoolOperations_gas_Tests is Testhelpers {
   }
 
   function test_liquidationCall_full() external {
-    uint256 price = contracts.aaveOracle.getAssetPrice(tokenList.weth);
+    uint256 price = contracts.oracle.getAssetPrice(tokenList.weth);
     _supplyOnReserve(borrower, (((price * 1e6) / 1e8) * 90) / 100, tokenList.usdx);
     _borrowArbitraryAmount(borrower, 1 ether, tokenList.weth);
     deal(tokenList.weth, liquidator, 2 ether);
@@ -156,7 +156,7 @@ contract PoolOperations_gas_Tests is Testhelpers {
   }
 
   function test_liquidationCall_receive_ATokens_partial() external {
-    uint256 price = contracts.aaveOracle.getAssetPrice(tokenList.weth);
+    uint256 price = contracts.oracle.getAssetPrice(tokenList.weth);
     _supplyOnReserve(borrower, (((price * 3e6) / 1e8) * 90) / 100, tokenList.usdx);
     _borrowArbitraryAmount(borrower, 3 ether, tokenList.weth);
     deal(tokenList.weth, liquidator, 0.5 ether);
@@ -173,7 +173,7 @@ contract PoolOperations_gas_Tests is Testhelpers {
   }
 
   function test_liquidationCall_receive_ATokens_full() external {
-    uint256 price = contracts.aaveOracle.getAssetPrice(tokenList.weth);
+    uint256 price = contracts.oracle.getAssetPrice(tokenList.weth);
     _supplyOnReserve(borrower, (((price * 1e6) / 1e8) * 90) / 100, tokenList.usdx);
     _borrowArbitraryAmount(borrower, 1 ether, tokenList.weth);
     deal(tokenList.weth, liquidator, 2 ether);
@@ -196,7 +196,7 @@ contract PoolOperations_gas_Tests is Testhelpers {
   }
 
   function test_liquidationCall_deficit() external {
-    uint256 price = contracts.aaveOracle.getAssetPrice(tokenList.weth);
+    uint256 price = contracts.oracle.getAssetPrice(tokenList.weth);
     _supplyOnReserve(borrower, (price * 1e6) / 1e8, tokenList.usdx);
     _borrowArbitraryAmount(borrower, 1 ether, tokenList.weth);
     deal(tokenList.weth, liquidator, 2 ether);
@@ -216,7 +216,7 @@ contract PoolOperations_gas_Tests is Testhelpers {
   }
 
   function test_liquidationCall_deficitInAdditionalReserve() external {
-    uint256 price = contracts.aaveOracle.getAssetPrice(tokenList.weth);
+    uint256 price = contracts.oracle.getAssetPrice(tokenList.weth);
     _supplyOnReserve(borrower, (price * 1e6) / 1e8, tokenList.usdx);
     _borrowArbitraryAmount(borrower, 1e5, tokenList.wbtc); // additional deficit
     _borrowArbitraryAmount(borrower, 1 ether, tokenList.weth);

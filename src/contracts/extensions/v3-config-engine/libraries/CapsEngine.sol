@@ -2,7 +2,7 @@
 pragma solidity ^0.8.18;
 
 import {EngineFlags} from '../EngineFlags.sol';
-import {IAaveV3ConfigEngine as IEngine, IPoolConfigurator} from '../IAaveV3ConfigEngine.sol';
+import {IConfigEngine as IEngine, IPoolConfigurator} from '../IConfigEngine.sol';
 
 library CapsEngine {
   function executeCapsUpdate(

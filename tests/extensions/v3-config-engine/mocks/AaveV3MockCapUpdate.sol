@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import '../../../../src/contracts/extensions/v3-config-engine/AaveV3Payload.sol';
+import {IConfigEngine} from '../../../../src/contracts/extensions/v3-config-engine/IConfigEngine.sol';
 
 /**
  * @dev Smart contract for a mock caps update, for testing purposes
@@ -18,7 +19,7 @@ contract AaveV3MockCapUpdate is AaveV3Payload {
   function capsUpdates() public view override returns (IEngine.CapsUpdate[] memory) {
     IEngine.CapsUpdate[] memory capsUpdate = new IEngine.CapsUpdate[](1);
 
-    capsUpdate[0] = IEngine.CapsUpdate({
+    capsUpdate[0] = IConfigEngine.CapsUpdate({
       asset: ASSET_ADDRESS,
       supplyCap: 1_000_000,
       borrowCap: EngineFlags.KEEP_CURRENT
@@ -28,6 +29,6 @@ contract AaveV3MockCapUpdate is AaveV3Payload {
   }
 
   function getPoolContext() public pure override returns (IEngine.PoolContext memory) {
-    return IEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
+    return IConfigEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
   }
 }

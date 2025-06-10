@@ -4,7 +4,7 @@ pragma solidity ^0.8.18;
 import {IDefaultInterestRateStrategyV2} from '../../../interfaces/IDefaultInterestRateStrategyV2.sol';
 import {SafeCast} from '../../../dependencies/openzeppelin/contracts/SafeCast.sol';
 import {EngineFlags} from '../EngineFlags.sol';
-import {IAaveV3ConfigEngine as IEngine, IPoolConfigurator} from '../IAaveV3ConfigEngine.sol';
+import {IConfigEngine as IEngine, IPoolConfigurator} from '../IConfigEngine.sol';
 
 library RateEngine {
   using SafeCast for uint256;

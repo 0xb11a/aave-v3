@@ -7,7 +7,9 @@
     "get-encoded-args": "forge script scripts/PrepareReserves.sol --sig 'getEncodedArgs()'",
     "add-reserves": "source .env && forge script scripts/AddReserves.sol --rpc-url $RPC_MANTLE --private-key $PRIVATE_KEY --broadcast --slow",
     "deploy-executor": "source .env && forge script scripts/DeployExecutor.sol --rpc-url $RPC_MANTLE --private-key $PRIVATE_KEY --broadcast --slow",
-    "deploy:mantle": "source .env && forge script scripts/DeployAaveV3MarketBatched.sol --rpc-url $RPC_MANTLE --private-key $PRIVATE_KEY --broadcast --slow"
+    "deploy:mantle": "source .env && forge script scripts/DeployAaveV3MarketBatchedBase.sol --rpc-url $RPC_MANTLE --private-key $PRIVATE_KEY --broadcast --slow",
+    "deploy-new-market:mantle": "source .env && forge script scripts/DeployNewMarket.sol --rpc-url $RPC_MANTLE --private-key $PRIVATE_KEY --broadcast --slow",
+    "pre-deploy-new-market:mantle": "source .env && forge script scripts/DeployNewMarket.sol --rpc-url $RPC_MANTLE --private-key $PRIVATE_KEY"
   },
   "publishConfig": {
     "access": "public"

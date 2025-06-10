@@ -20,7 +20,7 @@ coverage-clean :; lcov --rc derive_function_end_line=0 --remove ./lcov.info -o .
 	'src/contracts/helpers/UiPoolDataProviderV3.sol' \
 	'src/contracts/helpers/WalletBalanceProvider.sol' \
 	'src/contracts/dependencies/*' \
-	'src/contracts/helpers/AaveProtocolDataProvider.sol' \
+	'src/contracts/helpers/ProtocolDataProvider.sol' \
 	'src/contracts/protocol/libraries/configuration/*' \
 	'src/contracts/protocol/libraries/logic/GenericLogic.sol' \
 	'src/contracts/protocol/libraries/logic/ReserveLogic.sol'

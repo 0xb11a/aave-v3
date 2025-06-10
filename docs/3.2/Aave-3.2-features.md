@@ -27,7 +27,7 @@ As it is a deprecated feature that will not be used in the future, it is possibl
 
 - Paraswap adapters change to be consistent with pool borrow dynamics: reverting if trying to enter a stable rate position.
 - Config engine (and payloads base) modified to not receive anymore input of stable rate mode, and adapted to the changes on PoolConfigurator.
-- AaveProtocolDataProvider adapted to the removal of stable rate, but keeping backwards compatibility.
+- ProtocolDataProvider adapted to the removal of stable rate, but keeping backwards compatibility.
 - UiIncentiveDataProviderV3 removing stable debt tokens data, but keeping interface compatible (returning 0 values)
 - Modifications on UIPoolDataProvider to remove stable debt related logic, but keeping compatibility (returning 0 values).
 - WrappedTokenGatewayV3 do not have borrowRate parameter on borrow and repay methods anymore
@@ -137,7 +137,7 @@ For a user to be able to enter/switch an eMode:
 - `Pool.getEModeCategoryData().eModeOracle` will always return `address(0)`
 - On `ValidationLogic.validateBorrow`, it is ensured that the asset is borrowable in the user's current eMode.
 - On `ValidationLogic.validateSetUserEmode` it is ensured that the user is only borrowing assets that are borrowable in a given eMode.
-- **BREAKING**: `AaveProtocolDataProvider.getReserveEModeCategory` was removed as as there no longer is a `1:1` relation between assets and eModes.
+- **BREAKING**: `ProtocolDataProvider.getReserveEModeCategory` was removed as as there no longer is a `1:1` relation between assets and eModes.
 - **BREAKING**: The event `EModeAssetCategoryChanged ` will no longer be emitted, because its values would be misleading. Therefore `AssetCollateralInEModeChanged` and `AssetBorrowableInEModeChanged` have been introduced.
 - **BREAKING**: `reserveConfig.getEModeCategory()` will return the current eMode, but will no longer be updated and is flagged deprecated.
 

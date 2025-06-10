@@ -68,7 +68,7 @@ library AaveV3BatchOrchestration {
       poolReport.poolImplementation,
       poolReport.poolConfiguratorImplementation,
       gettersReport1.protocolDataProvider,
-      peripheryReport.aaveOracle,
+      peripheryReport.oracle,
       peripheryReport.rewardsControllerImplementation,
       miscReport.priceOracleSentinel
     );
@@ -180,7 +180,7 @@ library AaveV3BatchOrchestration {
       setupReport.poolProxy,
       setupReport.poolConfiguratorProxy,
       miscReport.defaultInterestRateStrategy,
-      peripheryReport.aaveOracle,
+      peripheryReport.oracle,
       setupReport.rewardsControllerProxy,
       treasury,
       tokensReport.aToken,
@@ -308,7 +308,7 @@ library AaveV3BatchOrchestration {
     report.wrappedTokenGateway = gettersReportTwo.wrappedTokenGateway;
     report.l2Encoder = gettersReportTwo.l2Encoder;
     report.poolConfiguratorImplementation = poolReport.poolConfiguratorImplementation;
-    report.aaveOracle = peripheryReport.aaveOracle;
+    report.oracle = peripheryReport.oracle;
     report.paraSwapLiquiditySwapAdapter = paraswapReport.paraSwapLiquiditySwapAdapter;
     report.paraSwapRepayAdapter = paraswapReport.paraSwapRepayAdapter;
     report.paraSwapWithdrawSwapAdapter = paraswapReport.paraSwapWithdrawSwapAdapter;

@@ -11,7 +11,7 @@ import {PoolInstance} from '../../../src/contracts/instances/PoolInstance.sol';
 import {Errors} from '../../../src/contracts/protocol/libraries/helpers/Errors.sol';
 import {ReserveConfiguration} from '../../../src/contracts/protocol/pool/PoolConfigurator.sol';
 import {WadRayMath} from '../../../src/contracts/protocol/libraries/math/WadRayMath.sol';
-import {IAaveOracle} from '../../../src/contracts/interfaces/IAaveOracle.sol';
+import {IOracle} from '../../../src/contracts/interfaces/IOracle.sol';
 import {TestnetProcedures} from '../../utils/TestnetProcedures.sol';
 
 contract PoolTests is TestnetProcedures {
@@ -595,10 +595,10 @@ contract PoolTests is TestnetProcedures {
     pool.borrow(tokenList.weth, borrowAmount, 2, 0, alice);
 
     stdstore
-      .target(IAaveOracle(report.aaveOracle).getSourceOfAsset(tokenList.wbtc))
+      .target(IOracle(report.oracle).getSourceOfAsset(tokenList.wbtc))
       .sig('_latestAnswer()')
       .checked_write(
-        _calcPrice(IAaveOracle(report.aaveOracle).getAssetPrice(tokenList.wbtc), 70_00)
+        _calcPrice(IOracle(report.oracle).getAssetPrice(tokenList.wbtc), 70_00)
       );
 
     vm.expectRevert(bytes(Errors.HEALTH_FACTOR_LOWER_THAN_LIQUIDATION_THRESHOLD));

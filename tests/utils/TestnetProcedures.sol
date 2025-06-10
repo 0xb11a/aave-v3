@@ -17,9 +17,9 @@ import {PoolConfigurator} from '../../src/contracts/protocol/pool/PoolConfigurat
 import {DefaultReserveInterestRateStrategyV2} from '../../src/contracts/misc/DefaultReserveInterestRateStrategyV2.sol';
 import {ReserveConfiguration} from '../../src/contracts/protocol/libraries/configuration/ReserveConfiguration.sol';
 import {PercentageMath} from '../../src/contracts/protocol/libraries/math/PercentageMath.sol';
-import {AaveProtocolDataProvider} from '../../src/contracts/helpers/AaveProtocolDataProvider.sol';
+import {ProtocolDataProvider} from '../../src/contracts/helpers/ProtocolDataProvider.sol';
 import {MarketReportUtils} from '../../src/deployments/contracts/utilities/MarketReportUtils.sol';
-import {AaveV3ConfigEngine, IAaveV3ConfigEngine} from '../../src/contracts/extensions/v3-config-engine/AaveV3ConfigEngine.sol';
+import {ConfigEngine, IConfigEngine} from '../../src/contracts/extensions/v3-config-engine/ConfigEngine.sol';
 
 struct TestVars {
   uint8 underlyingDecimals;
@@ -222,7 +222,7 @@ contract TestnetProcedures is Test, DeployUtils, FfiUtils, DefaultMarketInput {
     MarketReport memory r = deployAaveV3Testnet(deployer, roles, config, flags, deployedContracts);
 
     AaveV3TestListing testnetListingPayload = new AaveV3TestListing(
-      IAaveV3ConfigEngine(r.configEngine),
+      ConfigEngine(r.configEngine),
       roles.poolAdmin,
       assetsList.weth,
       r

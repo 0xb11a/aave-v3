@@ -445,7 +445,7 @@ contract ERC4626StataTokenUpgradeableTest is TestnetProcedures {
       abi.encode(1e27)
     );
     uint256 stataPrice = uint256(erc4626Upgradeable.latestAnswer());
-    uint256 underlyingPrice = contracts.aaveOracle.getAssetPrice(underlying);
+    uint256 underlyingPrice = contracts.oracle.getAssetPrice(underlying);
     assertEq(stataPrice, underlyingPrice);
   }
 
@@ -457,7 +457,7 @@ contract ERC4626StataTokenUpgradeableTest is TestnetProcedures {
       abi.encode(liquidityIndex)
     );
     uint256 stataPrice = uint256(erc4626Upgradeable.latestAnswer());
-    uint256 underlyingPrice = contracts.aaveOracle.getAssetPrice(underlying);
+    uint256 underlyingPrice = contracts.oracle.getAssetPrice(underlying);
     uint256 expectedStataPrice = (underlyingPrice * liquidityIndex) / 1e27;
     assertEq(stataPrice, expectedStataPrice);
 

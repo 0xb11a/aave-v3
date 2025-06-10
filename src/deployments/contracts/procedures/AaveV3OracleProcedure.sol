@@ -2,17 +2,17 @@
 pragma solidity ^0.8.0;
 
 import '../../interfaces/IMarketReportTypes.sol';
-import {AaveOracle} from '../../../contracts/misc/AaveOracle.sol';
+import {Oracle} from '../../../contracts/misc/Oracle.sol';
 
 contract AaveV3OracleProcedure {
-  function _deployAaveOracle(
+  function _deployOracle(
     uint16 oracleDecimals,
     address poolAddressesProvider
   ) internal returns (address) {
     address[] memory emptyArray;
 
-    address aaveOracle = address(
-      new AaveOracle(
+    address oracle = address(
+      new Oracle(
         IPoolAddressesProvider(poolAddressesProvider),
         emptyArray,
         emptyArray,
@@ -22,6 +22,6 @@ contract AaveV3OracleProcedure {
       )
     );
 
-    return aaveOracle;
+    return oracle;
   }
 }

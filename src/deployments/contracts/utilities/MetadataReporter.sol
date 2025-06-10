@@ -36,7 +36,7 @@ contract MetadataReporter is IMetadataReporter {
       'poolConfiguratorImplementation',
       report.poolConfiguratorImplementation
     );
-    vm.serializeAddress(jsonReport, 'aaveOracle', report.aaveOracle);
+    vm.serializeAddress(jsonReport, 'Oracle', report.oracle);
     vm.serializeAddress(jsonReport, 'treasury', report.treasury);
     vm.serializeAddress(jsonReport, 'dustBin', report.dustBin);
     vm.serializeAddress(jsonReport, 'wrappedTokenGateway', report.wrappedTokenGateway);

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity ^0.8.18;
 
-import {IAaveV3ConfigEngine as IEngine, IAaveOracle} from '../IAaveV3ConfigEngine.sol';
+import {IConfigEngine as IEngine, IOracle} from '../IConfigEngine.sol';
 import {AggregatorInterface} from '../../../dependencies/chainlink/AggregatorInterface.sol';
 
 library PriceFeedEngine {
@@ -14,7 +14,7 @@ library PriceFeedEngine {
     _setPriceFeeds(engineConstants.oracle, updates);
   }
 
-  function _setPriceFeeds(IAaveOracle oracle, IEngine.PriceFeedUpdate[] memory updates) internal {
+  function _setPriceFeeds(IOracle oracle, IEngine.PriceFeedUpdate[] memory updates) internal {
     address[] memory assets = new address[](updates.length);
     address[] memory sources = new address[](updates.length);
 

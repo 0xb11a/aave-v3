@@ -157,7 +157,7 @@ contract DeploymentsGasLimits is BatchTestProcedures {
       poolReportOne.poolImplementation,
       poolReportOne.poolConfiguratorImplementation,
       gettersReportOne.protocolDataProvider,
-      peripheryReportOne.aaveOracle,
+      peripheryReportOne.oracle,
       peripheryReportOne.rewardsControllerImplementation,
       miscReport.priceOracleSentinel
     );
@@ -172,7 +172,7 @@ contract DeploymentsGasLimits is BatchTestProcedures {
       setupReportTwo.poolProxy,
       setupReportTwo.poolConfiguratorProxy,
       miscReport.defaultInterestRateStrategy,
-      peripheryReportOne.aaveOracle,
+      peripheryReportOne.oracle,
       setupReportTwo.rewardsControllerProxy,
       peripheryReportOne.treasury,
       tokensReport.aToken,

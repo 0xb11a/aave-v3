@@ -10,9 +10,9 @@ import {AaveV3TestListing} from '../mocks/AaveV3TestListing.sol';
 import {ACLManager} from '../../src/contracts/protocol/configuration/ACLManager.sol';
 import {WETH9} from '../../src/contracts/dependencies/weth/WETH9.sol';
 import {IPoolAddressesProvider} from '../../src/contracts/interfaces/IPoolAddressesProvider.sol';
-import {IAaveV3ConfigEngine} from '../../src/contracts/extensions/v3-config-engine/IAaveV3ConfigEngine.sol';
+import {ConfigEngine} from '../../src/contracts/extensions/v3-config-engine/ConfigEngine.sol';
 import {IPool} from '../../src/contracts/interfaces/IPool.sol';
-import {AaveV3ConfigEngine} from '../../src/contracts/extensions/v3-config-engine/AaveV3ConfigEngine.sol';
+import {ConfigEngine} from '../../src/contracts/extensions/v3-config-engine/ConfigEngine.sol';
 import {SequencerOracle} from '../../src/contracts/mocks/oracle/SequencerOracle.sol';
 import {IPoolDataProvider} from '../../src/contracts/interfaces/IPoolDataProvider.sol';
 import {IAToken} from '../../src/contracts/interfaces/IAToken.sol';
@@ -70,7 +70,7 @@ contract AaveV3BatchDeployment is BatchTestProcedures {
     checkFullReport(config, flags, fullReport);
 
     AaveV3TestListing testnetListingPayload = new AaveV3TestListing(
-      IAaveV3ConfigEngine(fullReport.configEngine),
+      ConfigEngine(fullReport.configEngine),
       marketOwner,
       weth9,
       fullReport
@@ -105,7 +105,7 @@ contract AaveV3BatchDeployment is BatchTestProcedures {
     checkFullReport(config, flags, fullReport);
 
     AaveV3TestListing testnetListingPayload = new AaveV3TestListing(
-      IAaveV3ConfigEngine(fullReport.configEngine),
+      ConfigEngine(fullReport.configEngine),
       marketOwner,
       weth9,
       fullReport
@@ -155,7 +155,7 @@ contract AaveV3BatchDeployment is BatchTestProcedures {
     checkFullReport(config, flags, fullReport);
 
     AaveV3TestListing testnetListingPayload = new AaveV3TestListing(
-      IAaveV3ConfigEngine(fullReport.configEngine),
+      ConfigEngine(fullReport.configEngine),
       marketOwner,
       weth9,
       fullReport

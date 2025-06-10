@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import 'forge-std/Test.sol';
 
 import {IVariableDebtToken} from '../../../src/contracts/interfaces/IVariableDebtToken.sol';
-import {IAaveOracle} from '../../../src/contracts/interfaces/IAaveOracle.sol';
+import {IOracle} from '../../../src/contracts/interfaces/IOracle.sol';
 import {Errors} from '../../../src/contracts/protocol/libraries/helpers/Errors.sol';
 import {IReserveInterestRateStrategy} from '../../../src/contracts/interfaces/IReserveInterestRateStrategy.sol';
 import {IPoolAddressesProvider} from '../../../src/contracts/interfaces/IPoolAddressesProvider.sol';
@@ -354,7 +354,7 @@ contract PoolBorrowTests is TestnetProcedures {
     address[] memory sources = new address[](1);
     assets[0] = tokenList.wbtc;
     sources[0] = address(
-      new MockAggregator(int256(IAaveOracle(report.aaveOracle).getAssetPrice(tokenList.wbtc)) / 4)
+      new MockAggregator(int256(IOracle(report.oracle).getAssetPrice(tokenList.wbtc)) / 4)
     );
 
     vm.startPrank(alice);
@@ -365,7 +365,7 @@ contract PoolBorrowTests is TestnetProcedures {
     vm.stopPrank();
 
     vm.prank(poolAdmin);
-    IAaveOracle(report.aaveOracle).setAssetSources(assets, sources);
+    IOracle(report.oracle).setAssetSources(assets, sources);
 
     vm.expectRevert(bytes(Errors.HEALTH_FACTOR_LOWER_THAN_LIQUIDATION_THRESHOLD));
 

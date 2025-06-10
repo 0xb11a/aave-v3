@@ -6,7 +6,7 @@ import {SafeERC20, IERC20} from 'openzeppelin-contracts/contracts/token/ERC20/ut
 import {IERC20Permit} from 'openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Permit.sol';
 
 import {IPool, IPoolAddressesProvider} from '../../interfaces/IPool.sol';
-import {IAaveOracle} from '../../interfaces/IAaveOracle.sol';
+import {IOracle} from '../../interfaces/IOracle.sol';
 import {DataTypes, ReserveConfiguration} from '../../protocol/libraries/configuration/ReserveConfiguration.sol';
 
 import {IAToken} from './interfaces/IAToken.sol';
@@ -204,7 +204,7 @@ abstract contract ERC4626StataTokenUpgradeable is ERC4626Upgradeable, IERC4626St
 
   ///@inheritdoc IERC4626StataToken
   function latestAnswer() external view returns (int256) {
-    uint256 aTokenUnderlyingAssetPrice = IAaveOracle(POOL_ADDRESSES_PROVIDER.getPriceOracle())
+    uint256 aTokenUnderlyingAssetPrice = IOracle(POOL_ADDRESSES_PROVIDER.getPriceOracle())
       .getAssetPrice(asset());
     // @notice aTokenUnderlyingAssetPrice * rate / RAY
     return int256(aTokenUnderlyingAssetPrice.mulDiv(_rate(), RAY, Math.Rounding.Floor));

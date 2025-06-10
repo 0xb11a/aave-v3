@@ -2,7 +2,7 @@
 pragma solidity ^0.8.10;
 
 import {IPool} from '../../src/contracts/interfaces/IPool.sol';
-import {IAaveOracle} from '../../src/contracts/interfaces/IAaveOracle.sol';
+import {IOracle} from '../../src/contracts/interfaces/IOracle.sol';
 import {LiquidationLogic} from '../../src/contracts/protocol/libraries/logic/LiquidationLogic.sol';
 import {ReserveConfiguration} from '../../src/contracts/protocol/libraries/configuration/ReserveConfiguration.sol';
 import {EModeConfiguration} from '../../src/contracts/protocol/libraries/configuration/EModeConfiguration.sol';
@@ -59,9 +59,9 @@ library LiquidationHelper {
     return
       LiquidationLogic._calculateAvailableCollateralToLiquidate(
         collateralReserveData.configuration,
-        IAaveOracle(local.oracle).getAssetPrice(collateralAsset),
+        IOracle(local.oracle).getAssetPrice(collateralAsset),
         10 ** IERC20Detailed(collateralReserveData.aTokenAddress).decimals(),
-        IAaveOracle(local.oracle).getAssetPrice(debtAsset),
+        IOracle(local.oracle).getAssetPrice(debtAsset),
         10 ** IERC20Detailed(local.vToken).decimals(),
         maxLiquidatableDebt,
         IERC20Detailed(collateralReserveData.aTokenAddress).balanceOf(local.user),

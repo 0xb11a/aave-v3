@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import '../../../../src/contracts/extensions/v3-config-engine/AaveV3Payload.sol';
+import {IConfigEngine} from '../../../../src/contracts/extensions/v3-config-engine/IConfigEngine.sol';
 
 /**
  * @dev Smart contract for a mock rate strategy params update, for testing purposes
@@ -23,9 +24,9 @@ contract AaveV3MockRatesUpdate is AaveV3Payload {
   {
     IEngine.RateStrategyUpdate[] memory ratesUpdate = new IEngine.RateStrategyUpdate[](1);
 
-    ratesUpdate[0] = IEngine.RateStrategyUpdate({
+    ratesUpdate[0] = IConfigEngine.RateStrategyUpdate({
       asset: ASSET_ADDRESS,
-      params: IEngine.InterestRateInputData({
+      params: IConfigEngine.InterestRateInputData({
         optimalUsageRatio: 50_00,
         baseVariableBorrowRate: 30, // 0.30%
         variableRateSlope1: 4_00,
@@ -37,6 +38,6 @@ contract AaveV3MockRatesUpdate is AaveV3Payload {
   }
 
   function getPoolContext() public pure override returns (IEngine.PoolContext memory) {
-    return IEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
+    return IConfigEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
   }
 }

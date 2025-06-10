@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import '../../../../src/contracts/extensions/v3-config-engine/AaveV3Payload.sol';
+import {IConfigEngine} from '../../../../src/contracts/extensions/v3-config-engine/IConfigEngine.sol';
 
 /**
  * @dev Smart contracts for a mock collateral update, with wrong LT/LB ratio
@@ -18,7 +19,7 @@ contract AaveV3MockCollateralUpdateWrongBonus is AaveV3Payload {
   function collateralsUpdates() public view override returns (IEngine.CollateralUpdate[] memory) {
     IEngine.CollateralUpdate[] memory collateralsUpdate = new IEngine.CollateralUpdate[](1);
 
-    collateralsUpdate[0] = IEngine.CollateralUpdate({
+    collateralsUpdate[0] = IConfigEngine.CollateralUpdate({
       asset: ASSET_ADDRESS,
       ltv: 62_00,
       liqThreshold: 90_00,
@@ -31,7 +32,7 @@ contract AaveV3MockCollateralUpdateWrongBonus is AaveV3Payload {
   }
 
   function getPoolContext() public pure override returns (IEngine.PoolContext memory) {
-    return IEngine.PoolContext({networkName: 'Avalanche', networkAbbreviation: 'Ava'});
+    return IConfigEngine.PoolContext({networkName: 'Avalanche', networkAbbreviation: 'Ava'});
   }
 }
 
@@ -50,7 +51,7 @@ contract AaveV3MockCollateralUpdateCorrectBonus is AaveV3Payload {
   function collateralsUpdates() public view override returns (IEngine.CollateralUpdate[] memory) {
     IEngine.CollateralUpdate[] memory collateralsUpdate = new IEngine.CollateralUpdate[](1);
 
-    collateralsUpdate[0] = IEngine.CollateralUpdate({
+    collateralsUpdate[0] = IConfigEngine.CollateralUpdate({
       asset: ASSET_ADDRESS,
       ltv: 62_00,
       liqThreshold: 90_00,
@@ -63,6 +64,6 @@ contract AaveV3MockCollateralUpdateCorrectBonus is AaveV3Payload {
   }
 
   function getPoolContext() public pure override returns (IEngine.PoolContext memory) {
-    return IEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
+    return IConfigEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
   }
 }

@@ -22,7 +22,7 @@ import {MockAggregatorSetPrice} from './utils/mocks/MockAggregatorSetPrice.sol';
 import {MockFlashLoanReceiver} from './helpers/FlashLoanReceiver.sol';
 
 // Interfaces
-import {IAaveV3ConfigEngine} from '../../src/contracts/extensions/v3-config-engine/AaveV3ConfigEngine.sol';
+import {ConfigEngine} from '../../src/contracts/extensions/v3-config-engine/ConfigEngine.sol';
 
 /// @notice Setup contract for the invariant test Suite, inherited by Tester
 contract Setup is BaseTest, DefaultMarketInput {
@@ -61,7 +61,7 @@ contract Setup is BaseTest, DefaultMarketInput {
     );
 
     AaveV3TestListing testnetListingPayload = new AaveV3TestListing(
-      IAaveV3ConfigEngine(r.configEngine),
+      ConfigEngine(r.configEngine),
       roles.poolAdmin,
       tokenList.weth,
       r
@@ -120,7 +120,7 @@ contract Setup is BaseTest, DefaultMarketInput {
       sources[1] = address(mockPriceAggregatorWBTC);
       sources[2] = address(mockPriceAggregatorWETH);
 
-      contracts.aaveOracle.setAssetSources(assets, sources);
+      contracts.oracle.setAssetSources(assets, sources);
     }
 
     weth = WETH9(payable(tokenList.weth));

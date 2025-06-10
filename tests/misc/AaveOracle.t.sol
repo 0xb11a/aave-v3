@@ -9,7 +9,7 @@ import {TestnetProcedures} from '../utils/TestnetProcedures.sol';
 import {Errors} from '../../src/contracts/protocol/libraries/helpers/Errors.sol';
 import {PriceOracle} from '../../src/contracts/mocks/oracle/PriceOracle.sol';
 
-contract AaveOracleTest is TestnetProcedures {
+contract OracleTest is TestnetProcedures {
   function setUp() public {
     initTestEnvironment();
   }
@@ -22,12 +22,12 @@ contract AaveOracleTest is TestnetProcedures {
     tokens[0] = mockTokenAddr;
 
     vm.expectRevert();
-    contracts.aaveOracle.getAssetPrice(mockTokenAddr);
+    contracts.oracle.getAssetPrice(mockTokenAddr);
 
     vm.expectRevert();
-    contracts.aaveOracle.getAssetsPrices(tokens);
+    contracts.oracle.getAssetsPrices(tokens);
 
-    assertEq(contracts.aaveOracle.getSourceOfAsset(address(mockToken)), address(0));
+    assertEq(contracts.oracle.getSourceOfAsset(address(mockToken)), address(0));
   }
 
   function testAddSingleSource() public {
@@ -40,11 +40,11 @@ contract AaveOracleTest is TestnetProcedures {
     sources[0] = address(new MockAggregator(price));
 
     vm.prank(poolAdmin);
-    contracts.aaveOracle.setAssetSources(tokens, sources);
+    contracts.oracle.setAssetSources(tokens, sources);
 
-    assertEq(contracts.aaveOracle.getAssetPrice(address(mockToken)), uint256(price));
-    assertEq(contracts.aaveOracle.getAssetsPrices(tokens)[0], uint256(price));
-    assertEq(contracts.aaveOracle.getSourceOfAsset(address(mockToken)), sources[0]);
+    assertEq(contracts.oracle.getAssetPrice(address(mockToken)), uint256(price));
+    assertEq(contracts.oracle.getAssetsPrices(tokens)[0], uint256(price));
+    assertEq(contracts.oracle.getSourceOfAsset(address(mockToken)), sources[0]);
   }
 
   function testUpdateSingleSource() public {
@@ -56,11 +56,11 @@ contract AaveOracleTest is TestnetProcedures {
     sources[0] = address(new MockAggregator(price));
 
     vm.prank(poolAdmin);
-    contracts.aaveOracle.setAssetSources(tokens, sources);
+    contracts.oracle.setAssetSources(tokens, sources);
 
-    assertEq(contracts.aaveOracle.getAssetPrice(tokenList.usdx), uint256(price));
-    assertEq(contracts.aaveOracle.getAssetsPrices(tokens)[0], uint256(price));
-    assertEq(contracts.aaveOracle.getSourceOfAsset(tokenList.usdx), sources[0]);
+    assertEq(contracts.oracle.getAssetPrice(tokenList.usdx), uint256(price));
+    assertEq(contracts.oracle.getAssetsPrices(tokens)[0], uint256(price));
+    assertEq(contracts.oracle.getSourceOfAsset(tokenList.usdx), sources[0]);
   }
 
   function test_revert_setAssetSources_inconsistentParams() public {
@@ -73,14 +73,14 @@ contract AaveOracleTest is TestnetProcedures {
     vm.startPrank(poolAdmin);
 
     vm.expectRevert(bytes(Errors.INCONSISTENT_PARAMS_LENGTH));
-    contracts.aaveOracle.setAssetSources(tokens, sources);
+    contracts.oracle.setAssetSources(tokens, sources);
     vm.stopPrank();
   }
 
   function testGetBaseCurrencyPrice() public view {
     assertEq(
-      contracts.aaveOracle.getAssetPrice(contracts.aaveOracle.BASE_CURRENCY()),
-      contracts.aaveOracle.BASE_CURRENCY_UNIT()
+      contracts.oracle.getAssetPrice(contracts.oracle.BASE_CURRENCY()),
+      contracts.oracle.BASE_CURRENCY_UNIT()
     );
   }
 
@@ -90,7 +90,7 @@ contract AaveOracleTest is TestnetProcedures {
 
     vm.expectRevert(bytes(Errors.CALLER_NOT_ASSET_LISTING_OR_POOL_ADMIN));
 
-    contracts.aaveOracle.setAssetSources(tokens, sources);
+    contracts.oracle.setAssetSources(tokens, sources);
   }
 
   function testUpdateSourceBaseCurrency() public {
@@ -100,11 +100,11 @@ contract AaveOracleTest is TestnetProcedures {
     sources[0] = address(new MockAggregator(10e7));
 
     vm.prank(poolAdmin);
-    contracts.aaveOracle.setAssetSources(tokens, sources);
+    contracts.oracle.setAssetSources(tokens, sources);
 
-    assertEq(contracts.aaveOracle.getAssetPrice(contracts.aaveOracle.BASE_CURRENCY()), 10e7);
+    assertEq(contracts.oracle.getAssetPrice(contracts.oracle.BASE_CURRENCY()), 10e7);
     assertEq(
-      contracts.aaveOracle.getSourceOfAsset(contracts.aaveOracle.BASE_CURRENCY()),
+      contracts.oracle.getSourceOfAsset(contracts.oracle.BASE_CURRENCY()),
       sources[0]
     );
   }
@@ -114,11 +114,11 @@ contract AaveOracleTest is TestnetProcedures {
     MintableERC20 mockToken = new MintableERC20('X', 'X', 18);
 
     vm.prank(poolAdmin);
-    contracts.aaveOracle.setFallbackOracle(address(priceOracle));
+    contracts.oracle.setFallbackOracle(address(priceOracle));
 
     priceOracle.setAssetPrice(address(mockToken), 300e8);
-    assertEq(contracts.aaveOracle.getSourceOfAsset(address(mockToken)), address(0));
-    assertEq(contracts.aaveOracle.getAssetPrice(address(mockToken)), 300e8);
+    assertEq(contracts.oracle.getSourceOfAsset(address(mockToken)), address(0));
+    assertEq(contracts.oracle.getAssetPrice(address(mockToken)), 300e8);
   }
 
   function testAssetZeroPriceWithoutFallback() public {
@@ -130,16 +130,16 @@ contract AaveOracleTest is TestnetProcedures {
     tokens[0] = address(mockToken);
     sources[0] = address(new MockAggregator(price));
 
-    assertEq(contracts.aaveOracle.getSourceOfAsset(tokens[0]), address(0));
+    assertEq(contracts.oracle.getSourceOfAsset(tokens[0]), address(0));
 
     vm.prank(poolAdmin);
-    contracts.aaveOracle.setAssetSources(tokens, sources);
+    contracts.oracle.setAssetSources(tokens, sources);
 
-    assertFalse(contracts.aaveOracle.getSourceOfAsset(address(mockToken)) == address(0));
-    assertEq(contracts.aaveOracle.getSourceOfAsset(address(mockToken)), sources[0]);
+    assertFalse(contracts.oracle.getSourceOfAsset(address(mockToken)) == address(0));
+    assertEq(contracts.oracle.getSourceOfAsset(address(mockToken)), sources[0]);
 
     vm.expectRevert();
-    contracts.aaveOracle.getAssetPrice(address(mockToken));
+    contracts.oracle.getAssetPrice(address(mockToken));
   }
 
   function testAssetZeroPriceNonZeroFallback() public {
@@ -155,17 +155,17 @@ contract AaveOracleTest is TestnetProcedures {
 
     priceOracle.setAssetPrice(tokens[0], fallbackPrice);
 
-    assertEq(contracts.aaveOracle.getSourceOfAsset(tokens[0]), address(0));
+    assertEq(contracts.oracle.getSourceOfAsset(tokens[0]), address(0));
 
     vm.prank(poolAdmin);
-    contracts.aaveOracle.setAssetSources(tokens, sources);
+    contracts.oracle.setAssetSources(tokens, sources);
 
     vm.prank(poolAdmin);
-    contracts.aaveOracle.setFallbackOracle(address(priceOracle));
+    contracts.oracle.setFallbackOracle(address(priceOracle));
 
-    assertFalse(contracts.aaveOracle.getSourceOfAsset(address(mockToken)) == address(0));
-    assertEq(contracts.aaveOracle.getSourceOfAsset(address(mockToken)), sources[0]);
-    assertEq(contracts.aaveOracle.getAssetPrice(address(mockToken)), fallbackPrice);
+    assertFalse(contracts.oracle.getSourceOfAsset(address(mockToken)) == address(0));
+    assertEq(contracts.oracle.getSourceOfAsset(address(mockToken)), sources[0]);
+    assertEq(contracts.oracle.getAssetPrice(address(mockToken)), fallbackPrice);
   }
 
   function testAssetZeroPriceAndZeroFallbackPrice() public {
@@ -181,27 +181,27 @@ contract AaveOracleTest is TestnetProcedures {
 
     priceOracle.setAssetPrice(tokens[0], fallbackPrice);
 
-    assertEq(contracts.aaveOracle.getSourceOfAsset(tokens[0]), address(0));
+    assertEq(contracts.oracle.getSourceOfAsset(tokens[0]), address(0));
 
     vm.prank(poolAdmin);
-    contracts.aaveOracle.setAssetSources(tokens, sources);
+    contracts.oracle.setAssetSources(tokens, sources);
 
     vm.prank(poolAdmin);
-    contracts.aaveOracle.setFallbackOracle(address(priceOracle));
+    contracts.oracle.setFallbackOracle(address(priceOracle));
 
-    assertFalse(contracts.aaveOracle.getSourceOfAsset(address(mockToken)) == address(0));
-    assertEq(contracts.aaveOracle.getSourceOfAsset(address(mockToken)), sources[0]);
-    assertEq(contracts.aaveOracle.getAssetPrice(address(mockToken)), fallbackPrice);
+    assertFalse(contracts.oracle.getSourceOfAsset(address(mockToken)) == address(0));
+    assertEq(contracts.oracle.getSourceOfAsset(address(mockToken)), sources[0]);
+    assertEq(contracts.oracle.getAssetPrice(address(mockToken)), fallbackPrice);
   }
 
   function testUpdateFallbackOracle() public {
     PriceOracle priceOracle = new PriceOracle();
-    assertEq(contracts.aaveOracle.getFallbackOracle(), address(0));
+    assertEq(contracts.oracle.getFallbackOracle(), address(0));
 
     vm.prank(poolAdmin);
-    contracts.aaveOracle.setFallbackOracle(address(priceOracle));
+    contracts.oracle.setFallbackOracle(address(priceOracle));
 
-    assertEq(contracts.aaveOracle.getFallbackOracle(), address(priceOracle));
-    assertFalse(contracts.aaveOracle.getFallbackOracle() == address(0));
+    assertEq(contracts.oracle.getFallbackOracle(), address(priceOracle));
+    assertFalse(contracts.oracle.getFallbackOracle() == address(0));
   }
 }

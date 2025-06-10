@@ -3,23 +3,23 @@ pragma solidity ^0.8.0;
 
 import {Create2Utils} from '../utilities/Create2Utils.sol';
 import {ConfigEngineReport} from '../../interfaces/IMarketReportTypes.sol';
-import {AaveV3ConfigEngine, IAaveV3ConfigEngine, CapsEngine, BorrowEngine, CollateralEngine, RateEngine, PriceFeedEngine, EModeEngine, ListingEngine} from '../../../contracts/extensions/v3-config-engine/AaveV3ConfigEngine.sol';
+import {ConfigEngine, IConfigEngine, CapsEngine, BorrowEngine, CollateralEngine, RateEngine, PriceFeedEngine, EModeEngine, ListingEngine} from '../../../contracts/extensions/v3-config-engine/ConfigEngine.sol';
 import {IPool} from '../../../contracts/interfaces/IPool.sol';
 import {IPoolConfigurator} from '../../../contracts/interfaces/IPoolConfigurator.sol';
-import {IAaveOracle} from '../../../contracts/interfaces/IAaveOracle.sol';
+import {IOracle} from '../../../contracts/interfaces/IOracle.sol';
 
 contract AaveV3HelpersProcedureOne {
   function _deployConfigEngine(
     address pool,
     address poolConfigurator,
     address defaultInterestRateStrategy,
-    address aaveOracle,
+    address Oracle,
     address rewardsController,
     address collector,
     address aTokenImpl,
     address vTokenImpl
   ) internal returns (ConfigEngineReport memory configEngineReport) {
-    IAaveV3ConfigEngine.EngineLibraries memory engineLibraries = IAaveV3ConfigEngine
+    IConfigEngine.EngineLibraries memory engineLibraries = IConfigEngine
       .EngineLibraries({
         listingEngine: Create2Utils._create2Deploy('v1', type(ListingEngine).creationCode),
         eModeEngine: Create2Utils._create2Deploy('v1', type(EModeEngine).creationCode),
@@ -30,12 +30,12 @@ contract AaveV3HelpersProcedureOne {
         capsEngine: Create2Utils._create2Deploy('v1', type(CapsEngine).creationCode)
       });
 
-    IAaveV3ConfigEngine.EngineConstants memory engineConstants = IAaveV3ConfigEngine
+    IConfigEngine.EngineConstants memory engineConstants = IConfigEngine
       .EngineConstants({
         pool: IPool(pool),
         poolConfigurator: IPoolConfigurator(poolConfigurator),
         defaultInterestRateStrategy: defaultInterestRateStrategy,
-        oracle: IAaveOracle(aaveOracle),
+        oracle: IOracle(Oracle),
         rewardsController: rewardsController,
         collector: collector
       });
@@ -49,7 +49,7 @@ contract AaveV3HelpersProcedureOne {
     configEngineReport.capsEngine = engineLibraries.capsEngine;
 
     configEngineReport.configEngine = address(
-      new AaveV3ConfigEngine(aTokenImpl, vTokenImpl, engineConstants, engineLibraries)
+      new ConfigEngine(aTokenImpl, vTokenImpl, engineConstants, engineLibraries)
     );
     return configEngineReport;
   }

@@ -7,6 +7,7 @@ import {MockAggregator} from '../../src/contracts/mocks/oracle/CLAggregators/Moc
 import {ACLManager} from '../../src/contracts/protocol/configuration/ACLManager.sol';
 import {MarketReport} from '../../src/deployments/interfaces/IMarketReportTypes.sol';
 import {IPoolConfigurator, ConfiguratorInputTypes} from '../../src/contracts/interfaces/IPoolConfigurator.sol';
+import {IConfigEngine} from 'src/contracts/extensions/v3-config-engine/ConfigEngine.sol';
 
 /**
  * @dev Smart contract for token listing, for testing purposes
@@ -62,7 +63,7 @@ contract AaveV3TestListing is AaveV3Payload {
 
   // list a token with virtual accounting deactivated (ex. GHO)
   function _preExecute() internal override {
-    IEngine.InterestRateInputData memory rateParams = IEngine.InterestRateInputData({
+    IEngine.InterestRateInputData memory rateParams = IConfigEngine.InterestRateInputData({
       optimalUsageRatio: 45_00,
       baseVariableBorrowRate: 0,
       variableRateSlope1: 4_00,
@@ -90,13 +91,13 @@ contract AaveV3TestListing is AaveV3Payload {
 
   function priceFeedsUpdates() public view override returns (IEngine.PriceFeedUpdate[] memory) {
     IEngine.PriceFeedUpdate[] memory feeds = new IEngine.PriceFeedUpdate[](1);
-    feeds[0] = IEngine.PriceFeedUpdate({asset: GHO_ADDRESS, priceFeed: GHO_MOCK_PRICE_FEED});
+    feeds[0] = IConfigEngine.PriceFeedUpdate({asset: GHO_ADDRESS, priceFeed: GHO_MOCK_PRICE_FEED});
     return feeds;
   }
 
   function borrowsUpdates() public view override returns (IEngine.BorrowUpdate[] memory) {
     IEngine.BorrowUpdate[] memory borrows = new IEngine.BorrowUpdate[](1);
-    borrows[0] = IEngine.BorrowUpdate({
+    borrows[0] = IConfigEngine.BorrowUpdate({
       asset: GHO_ADDRESS,
       enabledToBorrow: EngineFlags.ENABLED,
       borrowableInIsolation: EngineFlags.DISABLED,
@@ -115,15 +116,15 @@ contract AaveV3TestListing is AaveV3Payload {
   {
     IEngine.ListingWithCustomImpl[] memory listingsCustom = new IEngine.ListingWithCustomImpl[](3);
 
-    IEngine.InterestRateInputData memory rateParams = IEngine.InterestRateInputData({
+    IEngine.InterestRateInputData memory rateParams = IConfigEngine.InterestRateInputData({
       optimalUsageRatio: 45_00,
       baseVariableBorrowRate: 0,
       variableRateSlope1: 4_00,
       variableRateSlope2: 60_00
     });
 
-    listingsCustom[0] = IEngine.ListingWithCustomImpl(
-      IEngine.Listing({
+    listingsCustom[0] = IConfigEngine.ListingWithCustomImpl(
+      IConfigEngine.Listing({
         asset: USDX_ADDRESS,
         assetSymbol: 'USDX',
         priceFeed: USDX_MOCK_PRICE_FEED,
@@ -141,14 +142,14 @@ contract AaveV3TestListing is AaveV3Payload {
         debtCeiling: 0,
         liqProtocolFee: 10_00
       }),
-      IEngine.TokenImplementations({
+      IConfigEngine.TokenImplementations({
         aToken: ATOKEN_IMPLEMENTATION,
         vToken: VARIABLE_DEBT_TOKEN_IMPLEMENTATION
       })
     );
 
-    listingsCustom[1] = IEngine.ListingWithCustomImpl(
-      IEngine.Listing({
+    listingsCustom[1] = IConfigEngine.ListingWithCustomImpl(
+      IConfigEngine.Listing({
         asset: WBTC_ADDRESS,
         assetSymbol: 'WBTC',
         priceFeed: WBTC_MOCK_PRICE_FEED,
@@ -166,14 +167,14 @@ contract AaveV3TestListing is AaveV3Payload {
         debtCeiling: 0,
         liqProtocolFee: 10_00
       }),
-      IEngine.TokenImplementations({
+      IConfigEngine.TokenImplementations({
         aToken: ATOKEN_IMPLEMENTATION,
         vToken: VARIABLE_DEBT_TOKEN_IMPLEMENTATION
       })
     );
 
-    listingsCustom[2] = IEngine.ListingWithCustomImpl(
-      IEngine.Listing({
+    listingsCustom[2] = IConfigEngine.ListingWithCustomImpl(
+      IConfigEngine.Listing({
         asset: WETH_ADDRESS,
         assetSymbol: 'WETH',
         priceFeed: WETH_MOCK_PRICE_FEED,
@@ -191,7 +192,7 @@ contract AaveV3TestListing is AaveV3Payload {
         debtCeiling: 0,
         liqProtocolFee: 10_00
       }),
-      IEngine.TokenImplementations({
+      IConfigEngine.TokenImplementations({
         aToken: ATOKEN_IMPLEMENTATION,
         vToken: VARIABLE_DEBT_TOKEN_IMPLEMENTATION
       })
@@ -201,7 +202,7 @@ contract AaveV3TestListing is AaveV3Payload {
   }
 
   function getPoolContext() public pure override returns (IEngine.PoolContext memory) {
-    return IEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
+    return IConfigEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
   }
 
   function _postExecute() internal override {

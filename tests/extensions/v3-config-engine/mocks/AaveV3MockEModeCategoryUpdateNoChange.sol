@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import '../../../../src/contracts/extensions/v3-config-engine/AaveV3Payload.sol';
-
+import { IConfigEngine } from '../../../../src/contracts/extensions/v3-config-engine/IConfigEngine.sol';
 /**
  * @dev Smart contract for a mock e-mode category update with no changes, for testing purposes
  * IMPORTANT Parameters are pseudo-random, DON'T USE THIS ANYHOW IN PRODUCTION
@@ -19,7 +19,7 @@ contract AaveV3MockEModeCategoryUpdateNoChange is AaveV3Payload {
   {
     IEngine.EModeCategoryUpdate[] memory eModeUpdates = new IEngine.EModeCategoryUpdate[](1);
 
-    eModeUpdates[0] = IEngine.EModeCategoryUpdate({
+    eModeUpdates[0] = IConfigEngine.EModeCategoryUpdate({
       eModeCategory: 1,
       ltv: EngineFlags.KEEP_CURRENT,
       liqThreshold: EngineFlags.KEEP_CURRENT,
@@ -31,6 +31,6 @@ contract AaveV3MockEModeCategoryUpdateNoChange is AaveV3Payload {
   }
 
   function getPoolContext() public pure override returns (IEngine.PoolContext memory) {
-    return IEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
+    return IConfigEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
   }
 }
