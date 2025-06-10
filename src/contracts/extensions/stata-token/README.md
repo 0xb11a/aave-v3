@@ -89,7 +89,7 @@ While there are already mechanisms to price the `StataTokenV2` implemented by 3t
 `latestAnswer` returns the asset price priced as `underlying_price * exchangeRate`.
 It is important to note that:
 
-- `underlying_price` is fetched from the AaveOracle, which means it is subject to mechanisms implemented by the DAO on top of the Chainlink price feeds.
+- `underlying_price` is fetched from the Oracle, which means it is subject to mechanisms implemented by the DAO on top of the Chainlink price feeds.
 - the `latestAnswer` is a scaled response returning the price in the same denomination as `underlying_price` which means the sprice can be undervalued by up to 1 wei
 - while this should be obvious deviations in the price - even when limited to 1 wei per share - will compound per full share
 

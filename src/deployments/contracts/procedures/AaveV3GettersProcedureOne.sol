@@ -5,7 +5,7 @@ import {WalletBalanceProvider} from '../../../contracts/helpers/WalletBalancePro
 import {UiPoolDataProviderV3} from '../../../contracts/helpers/UiPoolDataProviderV3.sol';
 import {UiIncentiveDataProviderV3} from '../../../contracts/helpers/UiIncentiveDataProviderV3.sol';
 import {AggregatorInterface} from '../../../contracts/dependencies/chainlink/AggregatorInterface.sol';
-import {AaveProtocolDataProvider} from '../../../contracts/helpers/AaveProtocolDataProvider.sol';
+import {ProtocolDataProvider} from '../../../contracts/helpers/ProtocolDataProvider.sol';
 import {IPoolAddressesProvider} from '../../../contracts/interfaces/IPoolAddressesProvider.sol';
 
 contract AaveV3GettersProcedureOne {
@@ -26,7 +26,7 @@ contract AaveV3GettersProcedureOne {
     report.walletBalanceProvider = address(new WalletBalanceProvider());
     report.uiIncentiveDataProvider = address(new UiIncentiveDataProviderV3());
     report.protocolDataProvider = address(
-      new AaveProtocolDataProvider(IPoolAddressesProvider(poolAddressesProvider))
+      new ProtocolDataProvider(IPoolAddressesProvider(poolAddressesProvider))
     );
     if (
       networkBaseTokenPriceInUsdProxyAggregator != address(0) &&

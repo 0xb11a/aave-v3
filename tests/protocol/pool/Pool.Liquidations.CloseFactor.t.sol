@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import 'forge-std/Test.sol';
 
 import {IVariableDebtToken} from '../../../src/contracts/interfaces/IVariableDebtToken.sol';
-import {IAaveOracle} from '../../../src/contracts/interfaces/IAaveOracle.sol';
+import {IOracle} from '../../../src/contracts/interfaces/IOracle.sol';
 import {IPriceOracleGetter} from '../../../src/contracts/interfaces/IPriceOracleGetter.sol';
 import {IPoolAddressesProvider} from '../../../src/contracts/interfaces/IPoolAddressesProvider.sol';
 import {IAToken, IERC20} from '../../../src/contracts/interfaces/IAToken.sol';
@@ -75,7 +75,7 @@ contract PoolLiquidationCloseFactorTests is TestnetProcedures {
     uint256 supplyAmount
   ) public {
     address collateralAsset = tokenList.weth;
-    uint256 oraclePrice = contracts.aaveOracle.getAssetPrice(collateralAsset);
+    uint256 oraclePrice = contracts.oracle.getAssetPrice(collateralAsset);
     uint256 lowerBound = (LiquidationLogic.MIN_BASE_MAX_CLOSE_FACTOR_THRESHOLD *
       10 ** IERC20Detailed(collateralAsset).decimals()) / oraclePrice;
     supplyAmount = bound(supplyAmount, lowerBound, 1_000 ether);
@@ -93,7 +93,7 @@ contract PoolLiquidationCloseFactorTests is TestnetProcedures {
     uint256 supplyAmount
   ) public {
     address collateralAsset = tokenList.weth;
-    uint256 oraclePrice = contracts.aaveOracle.getAssetPrice(collateralAsset);
+    uint256 oraclePrice = contracts.oracle.getAssetPrice(collateralAsset);
     uint256 upperBound = (LiquidationLogic.MIN_BASE_MAX_CLOSE_FACTOR_THRESHOLD *
       10 ** IERC20Detailed(collateralAsset).decimals()) / oraclePrice;
     supplyAmount = bound(supplyAmount, 0.01 ether, upperBound);
@@ -111,7 +111,7 @@ contract PoolLiquidationCloseFactorTests is TestnetProcedures {
     uint256 supplyAmount
   ) public {
     address collateralAsset = tokenList.weth;
-    uint256 oraclePrice = contracts.aaveOracle.getAssetPrice(collateralAsset);
+    uint256 oraclePrice = contracts.oracle.getAssetPrice(collateralAsset);
     uint256 lowerBound = (LiquidationLogic.MIN_BASE_MAX_CLOSE_FACTOR_THRESHOLD *
       10 ** IERC20Detailed(collateralAsset).decimals()) / oraclePrice;
     supplyAmount = bound(supplyAmount, lowerBound * 2, 10_000 ether);
@@ -143,7 +143,7 @@ contract PoolLiquidationCloseFactorTests is TestnetProcedures {
       bob,
       (LiquidationLogic.MIN_BASE_MAX_CLOSE_FACTOR_THRESHOLD - 1e8) / 1e2
     );
-    uint256 oraclePrice = contracts.aaveOracle.getAssetPrice(tokenList.weth);
+    uint256 oraclePrice = contracts.oracle.getAssetPrice(tokenList.weth);
     uint256 supplyLtThreshold = ((LiquidationLogic.MIN_BASE_MAX_CLOSE_FACTOR_THRESHOLD - 1e8) *
       10 ** IERC20Detailed(tokenList.weth).decimals()) / oraclePrice;
     _supplyToPool(tokenList.weth, bob, supplyLtThreshold);
@@ -218,7 +218,7 @@ contract PoolLiquidationCloseFactorTests is TestnetProcedures {
     // borrow supply 4k
     _supplyToPool(tokenList.usdx, bob, 4200e6);
     uint256 amount = (4000e8 * (10 ** IERC20Detailed(tokenList.weth).decimals())) /
-      contracts.aaveOracle.getAssetPrice(tokenList.weth);
+      contracts.oracle.getAssetPrice(tokenList.weth);
     _supplyToPool(tokenList.weth, bob, amount);
     vm.prank(bob);
     _borrowToBeBelowHf(bob, tokenList.usdx, 0.98 ether);
@@ -263,7 +263,7 @@ contract PoolLiquidationCloseFactorTests is TestnetProcedures {
       amountToLiquidate,
       // assuming all debt is the asset we wanna liquidate
       (debtInBaseCurrency * 10 ** IERC20Detailed(debtAsset).decimals()) /
-        contracts.aaveOracle.getAssetPrice(debtAsset)
+        contracts.oracle.getAssetPrice(debtAsset)
     );
     // then we calculate the exact amounts
     LiquidationDataProvider.LiquidationInfo memory liquidationInfo = liquidationDataProvider
@@ -290,9 +290,9 @@ contract PoolLiquidationCloseFactorTests is TestnetProcedures {
   function _borrowToBeBelowHf(address user, address assetToBorrow, uint256 desiredhf) internal {
     uint256 requiredBorrowsInBase = _getRequiredBorrowsForHfBelow(user, desiredhf);
     uint256 amount = (requiredBorrowsInBase * (10 ** IERC20Detailed(assetToBorrow).decimals())) /
-      contracts.aaveOracle.getAssetPrice(assetToBorrow);
+      contracts.oracle.getAssetPrice(assetToBorrow);
     vm.mockCall(
-      address(contracts.aaveOracle),
+      address(contracts.oracle),
       abi.encodeWithSelector(IPriceOracleGetter.getAssetPrice.selector, assetToBorrow),
       abi.encode(0)
     );

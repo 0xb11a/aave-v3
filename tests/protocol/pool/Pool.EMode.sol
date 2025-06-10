@@ -13,7 +13,7 @@ import {Errors} from '../../../src/contracts/protocol/libraries/helpers/Errors.s
 import {ReserveConfiguration} from '../../../src/contracts/protocol/pool/PoolConfigurator.sol';
 import {WadRayMath} from '../../../src/contracts/protocol/libraries/math/WadRayMath.sol';
 import {PercentageMath} from '../../../src/contracts/protocol/libraries/math/PercentageMath.sol';
-import {IAaveOracle} from '../../../src/contracts/interfaces/IAaveOracle.sol';
+import {IOracle} from '../../../src/contracts/interfaces/IOracle.sol';
 import {TestnetProcedures} from '../../utils/TestnetProcedures.sol';
 import {TestnetERC20} from '../../../src/contracts/mocks/testnet-helpers/TestnetERC20.sol';
 
@@ -247,7 +247,7 @@ contract PoolEModeTests is TestnetProcedures {
     _mintTestnetToken(tokenList.usdx, alice, amount);
     _supplyToPool(tokenList.usdx, alice, amount);
     (uint256 totalCollateralBase, , , , , ) = contracts.poolProxy.getUserAccountData(alice);
-    uint256 debtPrice = contracts.aaveOracle.getAssetPrice(tokenList.wbtc);
+    uint256 debtPrice = contracts.oracle.getAssetPrice(tokenList.wbtc);
     uint256 borrowAmount = (totalCollateralBase * 1e8) / debtPrice;
     _borrowArbitraryAmount(tokenList.wbtc, alice, borrowAmount);
 
@@ -288,7 +288,7 @@ contract PoolEModeTests is TestnetProcedures {
       .poolProxy
       .getUserAccountData(user);
     uint256 maxBorrowInBase = (totalCollateralBase * currentLt) / 1e4;
-    uint256 debtPrice = contracts.aaveOracle.getAssetPrice(erc20);
+    uint256 debtPrice = contracts.oracle.getAssetPrice(erc20);
     uint256 borrowAmount = (maxBorrowInBase / debtPrice) * 10 ** TestnetERC20(erc20).decimals();
     _borrowArbitraryAmount(erc20, user, borrowAmount);
   }
@@ -298,7 +298,7 @@ contract PoolEModeTests is TestnetProcedures {
     _supplyToPool(erc20, bob, amount);
 
     vm.mockCall(
-      address(contracts.aaveOracle),
+      address(contracts.oracle),
       abi.encodeWithSelector(IPriceOracleGetter.getAssetPrice.selector, address(erc20)),
       abi.encode(0)
     );

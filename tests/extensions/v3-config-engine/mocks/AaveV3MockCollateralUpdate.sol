@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import '../../../../src/contracts/extensions/v3-config-engine/AaveV3Payload.sol';
+import {IConfigEngine} from '../../../../src/contracts/extensions/v3-config-engine/IConfigEngine.sol';
 
 /**
  * @dev Smart contract for a mock collateral update, for testing purposes
@@ -18,7 +19,7 @@ contract AaveV3MockCollateralUpdate is AaveV3Payload {
   function collateralsUpdates() public view override returns (IEngine.CollateralUpdate[] memory) {
     IEngine.CollateralUpdate[] memory collateralsUpdate = new IEngine.CollateralUpdate[](1);
 
-    collateralsUpdate[0] = IEngine.CollateralUpdate({
+    collateralsUpdate[0] = IConfigEngine.CollateralUpdate({
       asset: ASSET_ADDRESS,
       ltv: 62_00,
       liqThreshold: 72_00,
@@ -31,6 +32,6 @@ contract AaveV3MockCollateralUpdate is AaveV3Payload {
   }
 
   function getPoolContext() public pure override returns (IEngine.PoolContext memory) {
-    return IEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
+    return IConfigEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
   }
 }

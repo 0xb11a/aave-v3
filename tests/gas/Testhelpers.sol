@@ -42,7 +42,7 @@ contract Testhelpers is TestnetProcedures {
   function _borrowArbitraryAmount(address borrower, uint256 amount, address asset) internal {
     // set the oracle price of the borrow asset to 0
     vm.mockCall(
-      address(contracts.aaveOracle),
+      address(contracts.oracle),
       abi.encodeWithSelector(IPriceOracleGetter.getAssetPrice.selector, address(asset)),
       abi.encode(0)
     );

@@ -65,9 +65,9 @@ contract LiquidationHandler is BaseHandler {
 
     helper_debtAssetDeficitBefore = pool.getReserveDeficit(_getRandomBaseAsset(k));
 
-    helper_collateralAssetPrice = contracts.aaveOracle.getAssetPrice(_getRandomBaseAsset(j));
+    helper_collateralAssetPrice = contracts.oracle.getAssetPrice(_getRandomBaseAsset(j));
 
-    helper_debtAssetPrice = contracts.aaveOracle.getAssetPrice(_getRandomBaseAsset(k));
+    helper_debtAssetPrice = contracts.oracle.getAssetPrice(_getRandomBaseAsset(k));
 
     debtToCover = biasedclampLe(debtToCover, helper_violatorDebtBalanceBefore, l);
 

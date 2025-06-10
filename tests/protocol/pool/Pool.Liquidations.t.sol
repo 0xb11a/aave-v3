@@ -5,7 +5,7 @@ import 'forge-std/Test.sol';
 
 import {IAccessControl} from '../../../src/contracts/dependencies/openzeppelin/contracts/IAccessControl.sol';
 import {IVariableDebtToken} from '../../../src/contracts/interfaces/IVariableDebtToken.sol';
-import {IAaveOracle} from '../../../src/contracts/interfaces/IAaveOracle.sol';
+import {IOracle} from '../../../src/contracts/interfaces/IOracle.sol';
 import {IPriceOracleGetter} from '../../../src/contracts/interfaces/IPriceOracleGetter.sol';
 import {IPoolAddressesProvider} from '../../../src/contracts/interfaces/IPoolAddressesProvider.sol';
 import {IAToken} from '../../../src/contracts/interfaces/IAToken.sol';
@@ -978,11 +978,11 @@ contract PoolLiquidationTests is TestnetProcedures {
     params.priceImpactPercent = priceImpact;
     // This test expects oracle source is MockAggregator.sol
     stdstore
-      .target(IAaveOracle(report.aaveOracle).getSourceOfAsset(priceImpactSource))
+      .target(IOracle(report.oracle).getSourceOfAsset(priceImpactSource))
       .sig('_latestAnswer()')
       .checked_write(
         _calcPrice(
-          IAaveOracle(report.aaveOracle).getAssetPrice(priceImpactSource),
+          IOracle(report.oracle).getAssetPrice(priceImpactSource),
           params.priceImpactPercent
         )
       );
@@ -1056,10 +1056,10 @@ contract PoolLiquidationTests is TestnetProcedures {
     vm.stopPrank();
 
     stdstore
-      .target(IAaveOracle(report.aaveOracle).getSourceOfAsset(tokenList.wbtc))
+      .target(IOracle(report.oracle).getSourceOfAsset(tokenList.wbtc))
       .sig('_latestAnswer()')
       .checked_write(
-        _calcPrice(IAaveOracle(report.aaveOracle).getAssetPrice(tokenList.wbtc), 40_00)
+        _calcPrice(IOracle(report.oracle).getAssetPrice(tokenList.wbtc), 40_00)
       );
 
     vm.prank(poolAdmin);
@@ -1078,10 +1078,10 @@ contract PoolLiquidationTests is TestnetProcedures {
     vm.stopPrank();
 
     stdstore
-      .target(IAaveOracle(report.aaveOracle).getSourceOfAsset(tokenList.wbtc))
+      .target(IOracle(report.oracle).getSourceOfAsset(tokenList.wbtc))
       .sig('_latestAnswer()')
       .checked_write(
-        _calcPrice(IAaveOracle(report.aaveOracle).getAssetPrice(tokenList.wbtc), 40_00)
+        _calcPrice(IOracle(report.oracle).getAssetPrice(tokenList.wbtc), 40_00)
       );
 
     vm.expectRevert(bytes(Errors.SPECIFIED_CURRENCY_NOT_BORROWED_BY_USER));

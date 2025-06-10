@@ -9,7 +9,7 @@ import {RateEngine} from './libraries/RateEngine.sol';
 import {PriceFeedEngine} from './libraries/PriceFeedEngine.sol';
 import {EModeEngine} from './libraries/EModeEngine.sol';
 import {ListingEngine} from './libraries/ListingEngine.sol';
-import './IAaveV3ConfigEngine.sol';
+import './IConfigEngine.sol';
 
 /**
  * @dev Helper smart contract abstracting the complexity of changing configurations on Aave v3, simplifying
@@ -20,14 +20,14 @@ import './IAaveV3ConfigEngine.sol';
  * Assumptions:
  * - Only one RewardsController for all assets
  * - Only one Collector for all assets
- * @author BGD Labs
+ * @author b11a
  */
-contract AaveV3ConfigEngine is IAaveV3ConfigEngine {
+contract ConfigEngine is IConfigEngine {
   using Address for address;
 
   IPool public immutable POOL;
   IPoolConfigurator public immutable POOL_CONFIGURATOR;
-  IAaveOracle public immutable ORACLE;
+  IOracle public immutable ORACLE;
   address public immutable ATOKEN_IMPL;
   address public immutable VTOKEN_IMPL;
   address public immutable REWARDS_CONTROLLER;
@@ -93,7 +93,7 @@ contract AaveV3ConfigEngine is IAaveV3ConfigEngine {
     RATE_ENGINE = engineLibraries.rateEngine;
   }
 
-  /// @inheritdoc IAaveV3ConfigEngine
+  /// @inheritdoc IConfigEngine
   function listAssets(PoolContext calldata context, Listing[] calldata listings) external {
     require(listings.length != 0, 'AT_LEAST_ONE_ASSET_REQUIRED');
 
@@ -108,7 +108,7 @@ contract AaveV3ConfigEngine is IAaveV3ConfigEngine {
     listAssetsCustom(context, customListings);
   }
 
-  /// @inheritdoc IAaveV3ConfigEngine
+  /// @inheritdoc IConfigEngine
   function listAssetsCustom(
     PoolContext calldata context,
     ListingWithCustomImpl[] memory listings
@@ -124,14 +124,14 @@ contract AaveV3ConfigEngine is IAaveV3ConfigEngine {
     );
   }
 
-  /// @inheritdoc IAaveV3ConfigEngine
+  /// @inheritdoc IConfigEngine
   function updateCaps(CapsUpdate[] calldata updates) external {
     CAPS_ENGINE.functionDelegateCall(
       abi.encodeWithSelector(CapsEngine.executeCapsUpdate.selector, _getEngineConstants(), updates)
     );
   }
 
-  /// @inheritdoc IAaveV3ConfigEngine
+  /// @inheritdoc IConfigEngine
   function updatePriceFeeds(PriceFeedUpdate[] calldata updates) external {
     PRICE_FEED_ENGINE.functionDelegateCall(
       abi.encodeWithSelector(
@@ -142,7 +142,7 @@ contract AaveV3ConfigEngine is IAaveV3ConfigEngine {
     );
   }
 
-  /// @inheritdoc IAaveV3ConfigEngine
+  /// @inheritdoc IConfigEngine
   function updateCollateralSide(CollateralUpdate[] calldata updates) external {
     COLLATERAL_ENGINE.functionDelegateCall(
       abi.encodeWithSelector(
@@ -153,7 +153,7 @@ contract AaveV3ConfigEngine is IAaveV3ConfigEngine {
     );
   }
 
-  /// @inheritdoc IAaveV3ConfigEngine
+  /// @inheritdoc IConfigEngine
   function updateBorrowSide(BorrowUpdate[] calldata updates) external {
     BORROW_ENGINE.functionDelegateCall(
       abi.encodeWithSelector(
@@ -164,7 +164,7 @@ contract AaveV3ConfigEngine is IAaveV3ConfigEngine {
     );
   }
 
-  /// @inheritdoc IAaveV3ConfigEngine
+  /// @inheritdoc IConfigEngine
   function updateRateStrategies(RateStrategyUpdate[] calldata updates) external {
     RATE_ENGINE.functionDelegateCall(
       abi.encodeWithSelector(
@@ -175,7 +175,7 @@ contract AaveV3ConfigEngine is IAaveV3ConfigEngine {
     );
   }
 
-  /// @inheritdoc IAaveV3ConfigEngine
+  /// @inheritdoc IConfigEngine
   function updateEModeCategories(EModeCategoryUpdate[] calldata updates) external {
     EMODE_ENGINE.functionDelegateCall(
       abi.encodeWithSelector(
@@ -186,7 +186,7 @@ contract AaveV3ConfigEngine is IAaveV3ConfigEngine {
     );
   }
 
-  /// @inheritdoc IAaveV3ConfigEngine
+  /// @inheritdoc IConfigEngine
   function updateAssetsEMode(AssetEModeUpdate[] calldata updates) external {
     EMODE_ENGINE.functionDelegateCall(
       abi.encodeWithSelector(

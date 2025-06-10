@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import '../../../../src/contracts/extensions/v3-config-engine/AaveV3Payload.sol';
+import {IConfigEngine} from '../../../../src/contracts/extensions/v3-config-engine/IConfigEngine.sol';
 
 /**
  * @dev Smart contract for a mock borrow update with no change, to be able to test
@@ -17,7 +18,7 @@ contract AaveV3MockBorrowUpdateNoChange is AaveV3Payload {
   function borrowsUpdates() public view override returns (IEngine.BorrowUpdate[] memory) {
     IEngine.BorrowUpdate[] memory borrowsUpdate = new IEngine.BorrowUpdate[](1);
 
-    borrowsUpdate[0] = IEngine.BorrowUpdate({
+    borrowsUpdate[0] = IConfigEngine.BorrowUpdate({
       asset: ASSET_ADDRESS,
       enabledToBorrow: EngineFlags.KEEP_CURRENT,
       flashloanable: EngineFlags.KEEP_CURRENT,
@@ -30,6 +31,6 @@ contract AaveV3MockBorrowUpdateNoChange is AaveV3Payload {
   }
 
   function getPoolContext() public pure override returns (IEngine.PoolContext memory) {
-    return IEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
+    return IConfigEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
   }
 }

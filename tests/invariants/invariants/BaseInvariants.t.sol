@@ -136,7 +136,7 @@ abstract contract BaseInvariants is HandlerAggregator {
 
   function assert_ORACLE_INVARIANT_A() internal {
     for (uint256 i; i < baseAssets.length; i++) {
-      try contracts.aaveOracle.getAssetPrice(baseAssets[i]) {} catch {
+      try contracts.oracle.getAssetPrice(baseAssets[i]) {} catch {
         assertTrue(false, ORACLE_INVARIANT_A);
       }
     }
@@ -144,8 +144,8 @@ abstract contract BaseInvariants is HandlerAggregator {
 
   function assert_ORACLE_INVARIANT_B() internal {
     for (uint256 i; i < baseAssets.length; i++) {
-      uint256 price1 = contracts.aaveOracle.getAssetPrice(baseAssets[i]);
-      uint256 price2 = contracts.aaveOracle.getAssetPrice(baseAssets[i]);
+      uint256 price1 = contracts.oracle.getAssetPrice(baseAssets[i]);
+      uint256 price2 = contracts.oracle.getAssetPrice(baseAssets[i]);
       assertEq(price1, price2, ORACLE_INVARIANT_B);
     }
   }

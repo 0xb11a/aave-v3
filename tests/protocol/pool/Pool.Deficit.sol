@@ -9,7 +9,7 @@ import {IERC20} from '../../../src/contracts/dependencies/openzeppelin/contracts
 import {IERC20Detailed} from '../../../src/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
 import {IPool, DataTypes} from '../../../src/contracts/interfaces/IPool.sol';
 import {Errors} from '../../../src/contracts/protocol/libraries/helpers/Errors.sol';
-import {IAaveOracle} from '../../../src/contracts/interfaces/IAaveOracle.sol';
+import {IOracle} from '../../../src/contracts/interfaces/IOracle.sol';
 import {TestnetProcedures} from '../../utils/TestnetProcedures.sol';
 import {IAccessControl} from '../../../src/contracts/dependencies/openzeppelin/contracts/IAccessControl.sol';
 import {IAToken} from '../../../src/contracts/interfaces/IAToken.sol';

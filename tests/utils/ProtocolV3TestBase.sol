@@ -8,7 +8,7 @@ import {ReserveConfiguration} from '../../src/contracts/protocol/libraries/confi
 import {IPoolAddressesProvider} from '../../src/contracts/interfaces/IPoolAddressesProvider.sol';
 import {IPoolDataProvider} from '../../src/contracts/interfaces/IPoolDataProvider.sol';
 import {IPool} from '../../src/contracts/interfaces/IPool.sol';
-import {IAaveOracle} from '../../src/contracts/interfaces/IAaveOracle.sol';
+import {IOracle} from '../../src/contracts/interfaces/IOracle.sol';
 import {DataTypes} from '../../src/contracts/protocol/libraries/types/DataTypes.sol';
 import {IPoolConfigurator} from '../../src/contracts/interfaces/IPoolConfigurator.sol';
 import {ProxyHelpers} from './ProxyHelpers.sol';
@@ -204,7 +204,7 @@ contract ProtocolV3TestBase is DiffUtils {
     vm.serializeJson(reservesKey, '{}');
 
     IPoolAddressesProvider addressesProvider = IPoolAddressesProvider(pool.ADDRESSES_PROVIDER());
-    IAaveOracle oracle = IAaveOracle(addressesProvider.getPriceOracle());
+    IOracle oracle = IOracle(addressesProvider.getPriceOracle());
     for (uint256 i = 0; i < configs.length; i++) {
       ReserveConfig memory config = configs[i];
       ExtendedAggregatorV2V3Interface assetOracle = ExtendedAggregatorV2V3Interface(
@@ -723,7 +723,7 @@ contract ProtocolV3TestBase is DiffUtils {
     address asset,
     address expectedSource
   ) internal view {
-    IAaveOracle oracle = IAaveOracle(addressesProvider.getPriceOracle());
+    IOracle oracle = IOracle(addressesProvider.getPriceOracle());
 
     require(
       oracle.getSourceOfAsset(asset) == expectedSource,

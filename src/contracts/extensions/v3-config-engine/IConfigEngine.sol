@@ -3,12 +3,12 @@ pragma solidity ^0.8.18;
 
 import {IPool} from '../../interfaces/IPool.sol';
 import {IPoolConfigurator} from '../../interfaces/IPoolConfigurator.sol';
-import {IAaveOracle} from '../../interfaces/IAaveOracle.sol';
+import {IOracle} from '../../interfaces/IOracle.sol';
 import {IDefaultInterestRateStrategyV2} from '../../interfaces/IDefaultInterestRateStrategyV2.sol';
 
 /// @dev Examples here assume the usage of the `AaveV3Payload` base contracts
 /// contained in this same repository
-interface IAaveV3ConfigEngine {
+interface IConfigEngine {
   struct Basic {
     string assetSymbol;
     TokenImplementations implementations;
@@ -27,7 +27,7 @@ interface IAaveV3ConfigEngine {
   struct EngineConstants {
     IPool pool;
     IPoolConfigurator poolConfigurator;
-    IAaveOracle oracle;
+    IOracle oracle;
     address rewardsController;
     address collector;
     address defaultInterestRateStrategy;
@@ -316,7 +316,7 @@ interface IAaveV3ConfigEngine {
 
   function POOL_CONFIGURATOR() external view returns (IPoolConfigurator);
 
-  function ORACLE() external view returns (IAaveOracle);
+  function ORACLE() external view returns (IOracle);
 
   function ATOKEN_IMPL() external view returns (address);
 
