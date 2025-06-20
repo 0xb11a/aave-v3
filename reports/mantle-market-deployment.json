@@ -17,8 +17,7 @@
     "treasuryImplementation": "0x8D000be895738696197505437a1328FF00923Cc3",
     "uiIncentiveDataProvider": "0xe012c609dB55209a2Ab994aE62e92728f8AA45fe",
     "uiPoolDataProvider": "0x23903C6796A612057b6088465004068DA513BCb4",
-    "walletBalanceProvider": "0x14B2460cded7F55BF348857E41da111778Ea473b",
-    "wrappedTokenGateway": "0xC1909dd92EFf249E9fBB4bB344118e7E2c0Fd26B"
+    "walletBalanceProvider": "0x14B2460cded7F55BF348857E41da111778Ea473b"
   },
   "providerIds": {
     "1": {
@@ -138,7 +137,8 @@
       "protocolDataProvider": "0x60b6642207a157455746cFaF7273B4b2691e5416",
       "rewardsControllerImplementation": "0x4d1b23b768C63598Ae25B5f10E6aC99e95C30526",
       "rewardsControllerProxy": "0xFEEF2418a904c39f6eb779E726Ecb0A47eC23Cc8",
-      "variableDebtToken": "0x54920fc4FA85c43435c18f359363ea6879973c32"
+      "variableDebtToken": "0x54920fc4FA85c43435c18f359363ea6879973c32",
+      "wrappedTokenGateway": "0x5b7EaCEffca0890344aA06BfE10C1EDC65224239"
     },
     "8": {
       "aToken": "0x72F317Fb8f4c2F74A25e7477e93AC17BdE67F82d",
@@ -189,7 +189,8 @@
       "protocolDataProvider": "0xa53480df32d65B76cD6fCb2399786d0CFf65FD54",
       "rewardsControllerImplementation": "0xaCd4f76FdB2548Fc8ABEDa883D2C639CB4663F37",
       "rewardsControllerProxy": "0xe30F333b32E7d393f082172677Cbce2F5AAe7672",
-      "variableDebtToken": "0x8C503A3c07c19b2DA770bef804014682F784A97A"
+      "variableDebtToken": "0x8C503A3c07c19b2DA770bef804014682F784A97A",
+      "wrappedTokenGateway": "0xC7cA1089cC52aa555dda0F8C94D1C0C5936F7014"
     },
     "11": {
       "aToken": "0xaF2d0B1c8e43040abeCEEFD7CBb646F0b55213e8",
@@ -206,7 +207,8 @@
       "protocolDataProvider": "0x79Ef83f6635Ea6BdFB0B3F7022f783ad97019F31",
       "rewardsControllerImplementation": "0x91e8E83E1DF1c6d55C1595fc3A1E53385E37F34b",
       "rewardsControllerProxy": "0x1673DCe762CC7Ef83E439E67Ee945D1E3D4e27f6",
-      "variableDebtToken": "0xf35e52d8d84d95E86D7b3A4196E30F1f89EACaA8"
+      "variableDebtToken": "0xf35e52d8d84d95E86D7b3A4196E30F1f89EACaA8",
+      "wrappedTokenGateway": "0xa6C01e5eff717D3798E83e8911B6f59404abCcb1"
     },
     "12": {
       "aToken": "0xf00F3499eEf624A9C4aAa8108a47Db473F70325d",
@@ -223,7 +225,8 @@
       "protocolDataProvider": "0x69d09E0051669072914eC0bB9308aC670e214bD9",
       "rewardsControllerImplementation": "0x3DF9Cb712115a4CD5B7b639bcea5A60F594d25e2",
       "rewardsControllerProxy": "0x1b0498353373D8aEe3D1b8a458Db3C9c3AC98405",
-      "variableDebtToken": "0x68974e0fD087cCa00300CFe897D37BeEE1Edfe99"
+      "variableDebtToken": "0x68974e0fD087cCa00300CFe897D37BeEE1Edfe99",
+      "wrappedTokenGateway": "0xeeDaeC5fc47996aa3FdbF5Be74B64FDa23552a1A"
     },
     "8080": {
       "aToken": "0x1a2dEef11D825a3f54642F8c652437fafEdCE1ED",
@@ -240,7 +243,8 @@
       "protocolDataProvider": "0xF89465de26722775058aE7899DDD4E9719bd1E02",
       "rewardsControllerImplementation": "0x869FAB59a8a130a73DF3c7B740D84b23Ffe32325",
       "rewardsControllerProxy": "0x00a6D3B87E70d37bF38e7CdEe3a4759509c4a1b4",
-      "variableDebtToken": "0x4312972806c1B95ed14cd3Bb82A563b818A2CE62"
+      "variableDebtToken": "0x4312972806c1B95ed14cd3Bb82A563b818A2CE62",
+      "wrappedTokenGateway": "0xC1909dd92EFf249E9fBB4bB344118e7E2c0Fd26B"
     }
   }
 }
