@@ -18,7 +18,7 @@ import {IRewardsController} from '../../src/contracts/rewards/interfaces/IReward
 import '../../src/contracts/mocks/testnet-helpers/TestnetERC20.sol';
 import '../../src/contracts/protocol/pool/PoolConfigurator.sol';
 import '../../src/contracts/protocol/libraries/math/PercentageMath.sol';
-import '../../src/contracts/helpers/AaveProtocolDataProvider.sol';
+import '../../src/contracts/helpers/ProtocolDataProvider.sol';
 import {MarketReportUtils} from '../../src/deployments/contracts/utilities/MarketReportUtils.sol';
 
 struct TestVars {
@@ -139,7 +139,7 @@ contract BatchTestProcedures is Test, DeployUtils, FfiUtils, DefaultMarketInput 
       poolReport.poolImplementation,
       poolReport.poolConfiguratorImplementation,
       gettersReport1.protocolDataProvider,
-      peripheryReport.aaveOracle,
+      peripheryReport.oracle,
       peripheryReport.rewardsControllerImplementation,
       miscReport.priceOracleSentinel
     );
@@ -185,7 +185,7 @@ contract BatchTestProcedures is Test, DeployUtils, FfiUtils, DefaultMarketInput 
     assertTrue(r.poolConfiguratorProxy != address(0), 'report.poolConfiguratorProxy');
     assertTrue(r.poolConfiguratorImplementation != address(0), 'r.poolConfiguratorImplementation');
     assertTrue(r.protocolDataProvider != address(0), 'report.protocolDataProvider');
-    assertTrue(r.aaveOracle != address(0), 'report.aaveOracle');
+    assertTrue(r.oracle != address(0), 'report.oracle');
     assertTrue(r.defaultInterestRateStrategy != address(0), 'report.defaultInterestRateStrategy');
     assertTrue(r.aclManager != address(0), 'report.aclManager');
     if (config.treasury == address(0)) {

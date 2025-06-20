@@ -2,7 +2,7 @@
 pragma solidity ^0.8.18;
 
 import {Address} from 'openzeppelin-contracts/contracts/utils/Address.sol';
-import {IAaveV3ConfigEngine as IEngine, IPoolConfigurator, IPool, IDefaultInterestRateStrategyV2} from '../IAaveV3ConfigEngine.sol';
+import {IConfigEngine as IEngine, IPoolConfigurator, IPool, IDefaultInterestRateStrategyV2} from '../IConfigEngine.sol';
 import {PriceFeedEngine} from './PriceFeedEngine.sol';
 import {CapsEngine} from './CapsEngine.sol';
 import {BorrowEngine} from './BorrowEngine.sol';
@@ -166,17 +166,16 @@ library ListingEngine {
         treasury: collector,
         incentivesController: rewardsController,
         useVirtualBalance: true,
-        aTokenName: string.concat('Aave ', context.networkName, ' ', basics[i].assetSymbol),
-        aTokenSymbol: string.concat('a', context.networkAbbreviation, basics[i].assetSymbol),
+        aTokenName: string.concat('Lendle ', context.networkName, ' Market ', basics[i].assetSymbol),
+        aTokenSymbol: string.concat('l', basics[i].assetSymbol),
         variableDebtTokenName: string.concat(
-          'Aave ',
+          'Lendle ',
           context.networkName,
-          ' Variable Debt ',
+          ' Market Variable Debt ',
           basics[i].assetSymbol
         ),
         variableDebtTokenSymbol: string.concat(
           'variableDebt',
-          context.networkAbbreviation,
           basics[i].assetSymbol
         ),
         params: bytes('')

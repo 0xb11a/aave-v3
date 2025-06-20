@@ -3,7 +3,7 @@ pragma solidity ^0.8.18;
 
 import {DataTypes} from '../../../protocol/libraries/types/DataTypes.sol';
 import {ReserveConfiguration} from '../../../protocol/libraries/configuration/ReserveConfiguration.sol';
-import {IAaveV3ConfigEngine as IEngine, IPoolConfigurator, IPool} from '../IAaveV3ConfigEngine.sol';
+import {IConfigEngine as IEngine, IPoolConfigurator, IPool} from '../IConfigEngine.sol';
 import {PercentageMath} from '../../../protocol/libraries/math/PercentageMath.sol';
 import {EngineFlags} from '../EngineFlags.sol';
 

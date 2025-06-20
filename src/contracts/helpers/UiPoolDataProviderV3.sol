@@ -4,11 +4,11 @@ pragma solidity ^0.8.10;
 import {IERC20Detailed} from '../dependencies/openzeppelin/contracts/IERC20Detailed.sol';
 import {IPoolAddressesProvider} from '../interfaces/IPoolAddressesProvider.sol';
 import {IPool} from '../interfaces/IPool.sol';
-import {IAaveOracle} from '../interfaces/IAaveOracle.sol';
+import {IOracle} from '../interfaces/IOracle.sol';
 import {IAToken} from '../interfaces/IAToken.sol';
 import {IVariableDebtToken} from '../interfaces/IVariableDebtToken.sol';
 import {IDefaultInterestRateStrategyV2} from '../interfaces/IDefaultInterestRateStrategyV2.sol';
-import {AaveProtocolDataProvider} from './AaveProtocolDataProvider.sol';
+import {ProtocolDataProvider} from './ProtocolDataProvider.sol';
 import {WadRayMath} from '../protocol/libraries/math/WadRayMath.sol';
 import {ReserveConfiguration} from '../protocol/libraries/configuration/ReserveConfiguration.sol';
 import {UserConfiguration} from '../protocol/libraries/configuration/UserConfiguration.sol';
@@ -45,9 +45,9 @@ contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
   function getReservesData(
     IPoolAddressesProvider provider
   ) external view override returns (AggregatedReserveData[] memory, BaseCurrencyInfo memory) {
-    IAaveOracle oracle = IAaveOracle(provider.getPriceOracle());
+    IOracle oracle = IOracle(provider.getPriceOracle());
     IPool pool = IPool(provider.getPool());
-    AaveProtocolDataProvider poolDataProvider = AaveProtocolDataProvider(
+    ProtocolDataProvider poolDataProvider = ProtocolDataProvider(
       provider.getPoolDataProvider()
     );
 

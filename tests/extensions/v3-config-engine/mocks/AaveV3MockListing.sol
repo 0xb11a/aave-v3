@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import '../../../../src/contracts/extensions/v3-config-engine/AaveV3Payload.sol';
+import {IConfigEngine} from '../../../../src/contracts/extensions/v3-config-engine/IConfigEngine.sol';
 
 /**
  * @dev Smart contract for a mock listing, to be able to test without having a v3 instance on Local
@@ -25,11 +26,11 @@ contract AaveV3MockListing is AaveV3Payload {
   function newListings() public view override returns (IEngine.Listing[] memory) {
     IEngine.Listing[] memory listings = new IEngine.Listing[](1);
 
-    listings[0] = IEngine.Listing({
+    listings[0] = IConfigEngine.Listing({
       asset: ASSET_ADDRESS,
       assetSymbol: '1INCH',
       priceFeed: ASSET_FEED,
-      rateStrategyParams: IEngine.InterestRateInputData({
+      rateStrategyParams: IConfigEngine.InterestRateInputData({
         optimalUsageRatio: 80_00,
         baseVariableBorrowRate: 25, // 0.25%
         variableRateSlope1: 3_00,
@@ -53,6 +54,6 @@ contract AaveV3MockListing is AaveV3Payload {
   }
 
   function getPoolContext() public pure override returns (IEngine.PoolContext memory) {
-    return IEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
+    return IConfigEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
   }
 }

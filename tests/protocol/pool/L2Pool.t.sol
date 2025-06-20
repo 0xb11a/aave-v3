@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import 'forge-std/Test.sol';
 
-import {IAaveOracle} from '../../../src/contracts/interfaces/IAaveOracle.sol';
+import {IOracle} from '../../../src/contracts/interfaces/IOracle.sol';
 import {L2Encoder} from '../../../src/contracts/helpers/L2Encoder.sol';
 import {IL2Pool} from '../../../src/contracts/interfaces/IL2Pool.sol';
 import {IReserveInterestRateStrategy} from '../../../src/contracts/interfaces/IReserveInterestRateStrategy.sol';
@@ -207,10 +207,10 @@ contract L2PoolTests is PoolTests {
     vm.stopPrank();
 
     stdstore
-      .target(IAaveOracle(report.aaveOracle).getSourceOfAsset(tokenList.wbtc))
+      .target(IOracle(report.oracle).getSourceOfAsset(tokenList.wbtc))
       .sig('_latestAnswer()')
       .checked_write(
-        _calcPrice(IAaveOracle(report.aaveOracle).getAssetPrice(tokenList.wbtc), 30_00)
+        _calcPrice(IOracle(report.oracle).getAssetPrice(tokenList.wbtc), 30_00)
       );
 
     vm.expectEmit(true, true, true, false, address(contracts.poolProxy));

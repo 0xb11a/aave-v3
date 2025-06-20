@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import '../../../../src/contracts/extensions/v3-config-engine/AaveV3Payload.sol';
+import {IConfigEngine} from '../../../../src/contracts/extensions/v3-config-engine/IConfigEngine.sol';
 
 /**
  * @dev Smart contract for a mock price feed update, to be able to test
@@ -25,12 +26,12 @@ contract AaveV3MockPriceFeedUpdate is AaveV3Payload {
   function priceFeedsUpdates() public view override returns (IEngine.PriceFeedUpdate[] memory) {
     IEngine.PriceFeedUpdate[] memory priceFeedsUpdate = new IEngine.PriceFeedUpdate[](1);
 
-    priceFeedsUpdate[0] = IEngine.PriceFeedUpdate({asset: ASSET_ADDRESS, priceFeed: ASSET_FEED});
+    priceFeedsUpdate[0] = IConfigEngine.PriceFeedUpdate({asset: ASSET_ADDRESS, priceFeed: ASSET_FEED});
 
     return priceFeedsUpdate;
   }
 
   function getPoolContext() public pure override returns (IEngine.PoolContext memory) {
-    return IEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
+    return IConfigEngine.PoolContext({networkName: 'Local', networkAbbreviation: 'Loc'});
   }
 }

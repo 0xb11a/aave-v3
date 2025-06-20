@@ -5,12 +5,12 @@ import '../../contracts/interfaces/IPoolAddressesProvider.sol';
 import '../../contracts/interfaces/IPoolAddressesProviderRegistry.sol';
 import '../../contracts/interfaces/IPool.sol';
 import '../../contracts/interfaces/IPoolConfigurator.sol';
-import '../../contracts/interfaces/IAaveOracle.sol';
+import '../../contracts/interfaces/IOracle.sol';
 import '../../contracts/interfaces/IAToken.sol';
 import '../../contracts/interfaces/IVariableDebtToken.sol';
 import '../../contracts/interfaces/IACLManager.sol';
 import '../../contracts/interfaces/IDefaultInterestRateStrategyV2.sol';
-import '../../contracts/helpers/AaveProtocolDataProvider.sol';
+import '../../contracts/helpers/ProtocolDataProvider.sol';
 import '../../contracts/helpers/UiPoolDataProviderV3.sol';
 import '../../contracts/helpers/UiIncentiveDataProviderV3.sol';
 import '../../contracts/rewards/interfaces/IEmissionManager.sol';
@@ -30,8 +30,8 @@ struct ContractsReport {
   IPool poolImplementation;
   IPoolConfigurator poolConfiguratorProxy;
   IPoolConfigurator poolConfiguratorImplementation;
-  AaveProtocolDataProvider protocolDataProvider;
-  IAaveOracle aaveOracle;
+  ProtocolDataProvider protocolDataProvider;
+  IOracle oracle;
   IACLManager aclManager;
   ICollector treasury;
   IDefaultInterestRateStrategyV2 defaultInterestRateStrategy;
@@ -59,7 +59,7 @@ struct MarketReport {
   address poolConfiguratorProxy;
   address poolConfiguratorImplementation;
   address protocolDataProvider;
-  address aaveOracle;
+  address oracle;
   address defaultInterestRateStrategy;
   address priceOracleSentinel;
   address aclManager;
@@ -169,7 +169,7 @@ struct SetupReport {
 }
 
 struct PeripheryReport {
-  address aaveOracle;
+  address oracle;
   address treasury;
   address treasuryImplementation;
   address emissionManager;

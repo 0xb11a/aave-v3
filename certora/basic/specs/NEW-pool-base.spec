@@ -10,7 +10,7 @@ import "NEW-CVLMath.spec";
 */
 using ATokenHarness as _aToken;
 using PoolHarness as PH;
-using AaveProtocolDataProvider as _dataProvider;
+using ProtocolDataProvider as _dataProvider;
 using SimpleERC20 as _underlyingAsset;
 
 /*

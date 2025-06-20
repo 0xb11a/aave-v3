@@ -21,7 +21,7 @@ contract AaveV3SetupProcedure {
     address poolConfiguratorImplementation;
     address protocolDataProvider;
     address poolAdmin;
-    address aaveOracle;
+    address oracle;
     address rewardsControllerProxy;
     address rewardsControllerImplementation;
     address priceOracleSentinel;
@@ -52,7 +52,7 @@ contract AaveV3SetupProcedure {
     address poolImplementation,
     address poolConfiguratorImplementation,
     address protocolDataProvider,
-    address aaveOracle,
+    address Oracle,
     address rewardsControllerImplementation,
     address priceOracleSentinel
   ) internal returns (SetupReport memory) {
@@ -65,7 +65,7 @@ contract AaveV3SetupProcedure {
         poolConfiguratorImplementation,
         protocolDataProvider,
         roles.poolAdmin,
-        aaveOracle,
+        Oracle,
         config.incentivesProxy,
         rewardsControllerImplementation,
         priceOracleSentinel
@@ -115,7 +115,7 @@ contract AaveV3SetupProcedure {
     IPoolAddressesProvider provider = IPoolAddressesProvider(
       input.initialReport.poolAddressesProvider
     );
-    provider.setPriceOracle(input.aaveOracle);
+    provider.setPriceOracle(input.oracle);
     provider.setPoolImpl(input.poolImplementation);
     provider.setPoolConfiguratorImpl(input.poolConfiguratorImplementation);
     provider.setPoolDataProvider(input.protocolDataProvider);

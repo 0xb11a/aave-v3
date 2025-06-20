@@ -17,8 +17,8 @@ library MarketReportUtils {
         poolImplementation: IPool(report.poolImplementation),
         poolConfiguratorProxy: IPoolConfigurator(report.poolConfiguratorProxy),
         poolConfiguratorImplementation: IPoolConfigurator(report.poolConfiguratorImplementation),
-        protocolDataProvider: AaveProtocolDataProvider(report.protocolDataProvider),
-        aaveOracle: IAaveOracle(report.aaveOracle),
+        protocolDataProvider: ProtocolDataProvider(report.protocolDataProvider),
+        oracle: IOracle(report.oracle),
         aclManager: IACLManager(report.aclManager),
         treasury: ICollector(report.treasury),
         defaultInterestRateStrategy: IDefaultInterestRateStrategyV2(
