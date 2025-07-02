@@ -228,6 +228,23 @@
       "variableDebtToken": "0x68974e0fD087cCa00300CFe897D37BeEE1Edfe99",
       "wrappedTokenGateway": "0xeeDaeC5fc47996aa3FdbF5Be74B64FDa23552a1A"
     },
+    "14": {
+      "aToken": "0x1272fAc9a6eaAe3Fc5A8C91203b4632122924D67",
+      "aclManager": "0x5847D513133d7d88FDDb76043b7cc874B966e665",
+      "configEngine": "0xfeAC182123591c244227DAdB895EFF285F6dc382",
+      "interestRateStrategy": "0x477Bc26E5D374C6f09929Ff3a6eB6153c4dEA279",
+      "emissionManager": "0xc6Bfa770e26cb4Eba9330a17a7066E96914E3dB6",
+      "oracle": "0x1a603E9d79eF8e135BC65E63Ef3DC7d161a246F7",
+      "poolAddressesProvider": "0xaF1885108E0cDA0f0cd05298aA9E01677ca3718F",
+      "poolConfiguratorImplementation": "0x3A44D87f6039B8278D09bc3591858e766e46f7A7",
+      "poolConfiguratorProxy": "0x16fBEea1Dc82a2261e800F125fd6864a54D2f68F",
+      "poolImplementation": "0xC0b8aD8Fd6C1c37e6E9beB3C1CCc4f98d3134791",
+      "poolProxy": "0x5d7b73f9271c40ff737f98B8F818e7477761041f",
+      "protocolDataProvider": "0x40025ad3f5438aC971e61Ba97F9Ab1B8b818900d",
+      "rewardsControllerImplementation": "0x4AC5cd859eDf78f2cd3E808457C25b28ed3eA731",
+      "rewardsControllerProxy": "0xDc8661c292B01Ca80b9E84924455009dD91Db619",
+      "variableDebtToken": "0x0DC7fb831EA4F273d89D2def4801BbaebaF8f044"
+    },
     "8080": {
       "aToken": "0x1a2dEef11D825a3f54642F8c652437fafEdCE1ED",
       "aclManager": "0x950837dC7Fcb1468b0BE0FD6A72461DFB9a9E1c5",

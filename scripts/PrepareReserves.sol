@@ -601,6 +601,55 @@ contract PrepareReserves is Script {
                 liqProtocolFee: 0
             });
 
+        } else if (keccak256(abi.encodePacked(pairName)) == keccak256(abi.encodePacked("PT-cmETH-18SEP2025-WETH"))) {
+            listings[0] = IConfigEngine.Listing({
+                asset: 0x698eB002A4Ec013A33286f7F2ba0bE3970E66455,
+                assetSymbol: "PT-cmETH-18SEP2025",
+                priceFeed: 0xF15B195a3Db20E1973Da01959C7878121cc5074f,
+                rateStrategyParams: IConfigEngine.InterestRateInputData({
+                    optimalUsageRatio: 100,
+                    baseVariableBorrowRate: 0,
+                    variableRateSlope1: 0,
+                    variableRateSlope2: 0
+                }),
+                enabledToBorrow: 0,
+                borrowableInIsolation: 0,
+                withSiloedBorrowing: 0,
+                flashloanable: 0,
+                ltv: 9200,
+                liqThreshold: 9500,
+                liqBonus: 500,
+                reserveFactor: 1,
+                supplyCap: 20_000,
+                borrowCap: 0,
+                debtCeiling: 0,
+                liqProtocolFee: 1000
+            });
+
+            listings[1] = IConfigEngine.Listing({
+                asset: 0xdEAddEaDdeadDEadDEADDEAddEADDEAddead1111,
+                assetSymbol: "WETH",
+                priceFeed: 0x5bc7Cf88EB131DB18b5d7930e793095140799aD5,
+                rateStrategyParams: IConfigEngine.InterestRateInputData({
+                    optimalUsageRatio: 9000,
+                    baseVariableBorrowRate: 0,
+                    variableRateSlope1: 450,
+                    variableRateSlope2: 8000
+                }),
+                enabledToBorrow: 1,
+                borrowableInIsolation: 0,
+                withSiloedBorrowing: 0,
+                flashloanable: 0,
+                ltv: 0,
+                liqThreshold: 0,
+                liqBonus: 0,
+                reserveFactor: 15,
+                supplyCap: 20_000,
+                borrowCap: 2_000,
+                debtCeiling: 0,
+                liqProtocolFee: 0
+            });
+
         } else {
             revert("Unsupported pair name");
         }
