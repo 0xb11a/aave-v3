@@ -25,14 +25,14 @@ contract DefaultMarketInput is MarketInput {
     config = MarketConfig(
       0x5bc7Cf88EB131DB18b5d7930e793095140799aD5,
       0xD97F20bEbeD74e8144134C4b148fE93417dd0F96,
-      'Lendle Testnet Market',
+      'Lendle Hemi Market',
       8,
       address(0), // ParaswapAugustusRegistry
       address(0), // l2SequencerUptimeFeed
       0, // l2PriceOracleSentinelGracePeriod
       8080,
       0x0,
-      0x78c1b0C915c4FAA5FffA6CAbf0219DA63d7f4cb8, // WMNT
+      0x4200000000000000000000000000000000000006, // WETH
       0.0005e4,
       0.0004e4,
       address(0),

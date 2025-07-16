@@ -17,7 +17,7 @@ fs_permissions = [
   { access = "read", path = "./config" },
 ]
 ffi = true
-private_key = "${PRIVATE_KEY}"
+gas_price = 100000000
 
 [fuzz]
 runs = 1000
@@ -28,7 +28,9 @@ evm_version = 'london'
 
 [rpc_endpoints]
 mantle = "${RPC_MANTLE}"
+hemi = "${RPC_HEMI}"
 
 [etherscan]
 mantle = { key = "${ETHERSCAN_API_KEY_MANTLE}", chainId = 5000 }
+hemi = { key = "${ETHERSCAN_API_KEY_HEMI}", chainId = 43111, url = "https://explorer.hemi.xyz/api" }
 # See more config options https://github.com/gakonst/foundry/tree/master/config

@@ -35,19 +35,19 @@ import { Ownable } from 'src/contracts/dependencies/openzeppelin/contracts/Ownab
 contract DeployNewMarket is Script, AddReserves {
     using stdJson for string;
 
-    string marketId = 'Lendle Market Pendle 1';
-    uint256 providerId = 14;
-    string pair = 'PT-cmETH-18SEP2025-WETH';
-    address[] assets = [0x698eB002A4Ec013A33286f7F2ba0bE3970E66455, 0xdEAddEaDdeadDEadDEADDEAddEADDEAddead1111];
-    address[] sources = [0xF15B195a3Db20E1973Da01959C7878121cc5074f, 0x5bc7Cf88EB131DB18b5d7930e793095140799aD5];
+    string marketId = 'Hemi Market 1';
+    uint256 providerId = 1;
+    string pair = 'hemiBTC-WETH';
+    address[] assets = [0xAA40c0c7644e0b2B224509571e10ad20d9C4ef28, 0x4200000000000000000000000000000000000006]; // hemiBTC and WETH
+    address[] sources = [0xE23eCA12D7D2ED3829499556F6dCE06642AFd990, 0xb9D0073aCb296719C26a8BF156e4b599174fe1d5]; // Redstone
 
     function run() external {
         SetupReport memory setupReport;
 
         Roles memory roles = Roles(
-            0x94D292064aa143c9104806EAdaCE34B021B73C58,  // marketOwner
-            0x186930A448ec50F6aCEfa205d5cBf4cbB8a97259, // poolAdmin
-            0x50E2f7914A0D549b0ce650f023bD5c44dbACd1d9 // emergencyAdmin
+            0x62007a126BAb6BD6C3CC56896aa59080a3e55334,  // marketOwner
+            0x62007a126BAb6BD6C3CC56896aa59080a3e55334, // poolAdmin
+            0x62007a126BAb6BD6C3CC56896aa59080a3e55334 // emergencyAdmin
         );
 
         console.log('----------- Deploy', marketId,' --------------');
@@ -55,10 +55,13 @@ contract DeployNewMarket is Script, AddReserves {
 
         vm.startBroadcast();
 
+        console.log('----------- Deploying Registry --------------');
+
+        PoolAddressesProviderRegistry poolAddressesProviderRegistry = new PoolAddressesProviderRegistry(msg.sender);
+
         console.log('----------- Deploying and registering PoolAddressesProvider --------------');
 
         address poolAddressesProvider = address(new PoolAddressesProvider(marketId, msg.sender));
-        PoolAddressesProviderRegistry poolAddressesProviderRegistry = PoolAddressesProviderRegistry(0x5196208f0DADc5336af1285720bB6d684c061943);
         poolAddressesProviderRegistry.registerAddressesProvider(
             poolAddressesProvider,
             providerId
@@ -76,11 +79,12 @@ contract DeployNewMarket is Script, AddReserves {
         address poolImpl = address(new PoolInstance(IPoolAddressesProvider(poolAddressesProvider)));
         address poolConfiguratorImpl = address(new PoolConfiguratorInstance());
 
-        console.log('PoolAddressesProvider address: ', poolAddressesProvider);
-        console.log('ProtocolDataProvider address: ', protocolDataProvider);
-        console.log('Oracle address: ', oracle);
-        console.log('PoolImpl address: ', poolImpl);
-        console.log('PoolConfiguratorImpl address: ', poolConfiguratorImpl);
+        console.log('PoolAddressesProviderRegistry:', address(poolAddressesProviderRegistry));
+        console.log('PoolAddressesProvider:', poolAddressesProvider);
+        console.log('ProtocolDataProvider:', protocolDataProvider);
+        console.log('Oracle:', oracle);
+        console.log('PoolImpl:', poolImpl);
+        console.log('PoolConfiguratorImpl:', poolConfiguratorImpl);
 
         console.log('----------- Setting proxies of PriceOracle, PoolImpl, PoolConfiguratorImpl, PoolDataProvider --------------');
 
@@ -104,11 +108,11 @@ contract DeployNewMarket is Script, AddReserves {
         emissionManager.setRewardsController(setupReport.rewardsControllerProxy);
         Ownable(address(emissionManager)).transferOwnership(roles.poolAdmin);
 
-        console.log('EmissionManager address: ', address(emissionManager));
-        console.log('PoolProxy address: ', setupReport.poolProxy);
-        console.log('PoolConfiguratorProxy address: ', setupReport.poolConfiguratorProxy);
-        console.log('RewardsControllerImplementation address: ', rewardsControllerImplementation);
-        console.log('RewardsControllerProxy address: ', setupReport.rewardsControllerProxy);
+        console.log('EmissionManager:', address(emissionManager));
+        console.log('PoolProxy:', setupReport.poolProxy);
+        console.log('PoolConfiguratorProxy:', setupReport.poolConfiguratorProxy);
+        console.log('RewardsControllerImplementation:', rewardsControllerImplementation);
+        console.log('RewardsControllerProxy:', setupReport.rewardsControllerProxy);
 
         console.log('----------- Deploying ACLManager --------------');
 
@@ -121,7 +125,7 @@ contract DeployNewMarket is Script, AddReserves {
             new DefaultReserveInterestRateStrategyV2(poolAddressesProvider)
         );
 
-        console.log('InterestRateStrategy address: ', interestRateStrategy);
+        console.log('InterestRateStrategy:', interestRateStrategy);
 
         console.log('----------- Setting roles in ACLManager --------------');
 
@@ -131,7 +135,7 @@ contract DeployNewMarket is Script, AddReserves {
 
         manager.addEmergencyAdmin(roles.emergencyAdmin);
 
-        console.log('ACLManager address: ', setupReport.aclManager);
+        console.log('ACLManager:', setupReport.aclManager);
 
         console.log('----------- Deploying ConfigEngine --------------');
 
@@ -169,8 +173,8 @@ contract DeployNewMarket is Script, AddReserves {
         ATokenInstance aToken = new ATokenInstance(IPool(_setupReport.poolProxy));
         VariableDebtTokenInstance variableDebtToken = new VariableDebtTokenInstance(IPool(_setupReport.poolProxy));
 
-        console.log('ATokenInstance address: ', address(aToken));
-        console.log('VariableDebtTokenInstance address: ', address(variableDebtToken));
+        console.log('ATokenInstance:', address(aToken));
+        console.log('VariableDebtTokenInstance:', address(variableDebtToken));
 
         aToken.initialize(
             IPool(_setupReport.poolProxy), // pool proxy
@@ -202,11 +206,11 @@ contract DeployNewMarket is Script, AddReserves {
             )
         );
 
-        console.log('ConfigEngine address: ', configEngineReport.configEngine);
+        console.log('ConfigEngine:', configEngineReport.configEngine);
 
         console.log('----------- Adding ',pair,' pair --------------');
 
-        manager.addPoolAdmin(0x051F586dc679024F8c49A4b9F436fB4997a73373); // executor
+        manager.addPoolAdmin(0x35620B9787b9b9f2f66a5F821A7b5605E03A0B54); // executor
         addPair(pair, configEngineReport.configEngine);
         manager.addPoolAdmin(_roles.poolAdmin);
         manager.grantRole(manager.DEFAULT_ADMIN_ROLE(), _roles.poolAdmin);

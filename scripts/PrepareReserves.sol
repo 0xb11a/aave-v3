@@ -650,6 +650,55 @@ contract PrepareReserves is Script {
                 liqProtocolFee: 0
             });
 
+        } else if (keccak256(abi.encodePacked(pairName)) == keccak256(abi.encodePacked("hemiBTC-WETH"))) {
+            listings[0] = IConfigEngine.Listing({
+                asset: 0xAA40c0c7644e0b2B224509571e10ad20d9C4ef28,
+                assetSymbol: "hemiBTC",
+                priceFeed: 0xE23eCA12D7D2ED3829499556F6dCE06642AFd990,
+                rateStrategyParams: IConfigEngine.InterestRateInputData({
+                    optimalUsageRatio: 100,
+                    baseVariableBorrowRate: 0,
+                    variableRateSlope1: 0,
+                    variableRateSlope2: 0
+                }),
+                enabledToBorrow: 0,
+                borrowableInIsolation: 0,
+                withSiloedBorrowing: 0,
+                flashloanable: 0,
+                ltv: 8300,
+                liqThreshold: 8500,
+                liqBonus: 300,
+                reserveFactor: 1,
+                supplyCap: 50_000,
+                borrowCap: 0,
+                debtCeiling: 0,
+                liqProtocolFee: 1000
+            });
+
+            listings[1] = IConfigEngine.Listing({
+                asset: 0x4200000000000000000000000000000000000006,
+                assetSymbol: "WETH",
+                priceFeed: 0xb9D0073aCb296719C26a8BF156e4b599174fe1d5,
+                rateStrategyParams: IConfigEngine.InterestRateInputData({
+                    optimalUsageRatio: 9000,
+                    baseVariableBorrowRate: 0,
+                    variableRateSlope1: 450,
+                    variableRateSlope2: 8000
+                }),
+                enabledToBorrow: 1,
+                borrowableInIsolation: 0,
+                withSiloedBorrowing: 0,
+                flashloanable: 0,
+                ltv: 0,
+                liqThreshold: 0,
+                liqBonus: 0,
+                reserveFactor: 15,
+                supplyCap: 50_000,
+                borrowCap: 25_000,
+                debtCeiling: 0,
+                liqProtocolFee: 0
+            });
+
         } else {
             revert("Unsupported pair name");
         }

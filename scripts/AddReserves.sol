@@ -14,7 +14,7 @@ contract AddReserves is PrepareReserves {
     function addPair(string memory _pairToAdd, address _configEngine) public {
         data = getEncodedArgs(_pairToAdd); // get encoded args of reserve(s)
 
-        Executor executor = Executor(payable(0x051F586dc679024F8c49A4b9F436fB4997a73373)); // Executor address
+        Executor executor = Executor(payable(0x35620B9787b9b9f2f66a5F821A7b5605E03A0B54)); // Executor address
         executor.executeTransaction(
             _configEngine, // ConfigEngine address
             value,
