@@ -35,11 +35,11 @@ import { Ownable } from 'src/contracts/dependencies/openzeppelin/contracts/Ownab
 contract DeployNewMarket is Script, AddReserves {
     using stdJson for string;
 
-    string marketId = 'Lendle Market MNT 2';
-    uint256 providerId = 12;
-    string pair = 'MNT-USDe';
-    address[] assets = [0x78c1b0C915c4FAA5FffA6CAbf0219DA63d7f4cb8, 0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34];
-    address[] sources = [0xD97F20bEbeD74e8144134C4b148fE93417dd0F96, 0x5166FC3adff16E99bb099834a1315e57C5444394];
+    string marketId = 'Lendle Market cmETH 1';
+    uint256 providerId = 5;
+    string pair = 'cmETH-WETH';
+    address[] assets = [0xE6829d9a7eE3040e1276Fa75293Bde931859e8fA, 0xdEAddEaDdeadDEadDEADDEAddEADDEAddead1111];
+    address[] sources = [0xB45D04937398a071a156593a122e475F00Faa8B6, 0x5bc7Cf88EB131DB18b5d7930e793095140799aD5];
 
     function run() external {
         SetupReport memory setupReport;
