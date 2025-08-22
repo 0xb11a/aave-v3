@@ -115,7 +115,7 @@ contract PrepareReserves is Script {
             listings[0] = IConfigEngine.Listing({
                 asset: 0xcDA86A272531e8640cD7F1a92c01839911B90bb0,
                 assetSymbol: "mETH",
-                priceFeed: 0xB16FcAFB8378baA0a69142a325878FDCad58606A,
+                priceFeed: 0xB45D04937398a071a156593a122e475F00Faa8B6,
                 rateStrategyParams: IConfigEngine.InterestRateInputData({
                     optimalUsageRatio: 100, // default value, cannot be 0
                     baseVariableBorrowRate: 0,
@@ -164,7 +164,7 @@ contract PrepareReserves is Script {
             listings[0] = IConfigEngine.Listing({
                 asset: 0xcDA86A272531e8640cD7F1a92c01839911B90bb0,
                 assetSymbol: "mETH",
-                priceFeed: 0xB16FcAFB8378baA0a69142a325878FDCad58606A,
+                priceFeed: 0xB45D04937398a071a156593a122e475F00Faa8B6,
                 rateStrategyParams: IConfigEngine.InterestRateInputData({
                     optimalUsageRatio: 100, // default value, cannot be 0
                     baseVariableBorrowRate: 0,
@@ -213,7 +213,7 @@ contract PrepareReserves is Script {
             listings[0] = IConfigEngine.Listing({
                 asset: 0xE6829d9a7eE3040e1276Fa75293Bde931859e8fA,
                 assetSymbol: "cmETH",
-                priceFeed: 0xB16FcAFB8378baA0a69142a325878FDCad58606A,
+                priceFeed: 0xB45D04937398a071a156593a122e475F00Faa8B6,
                 rateStrategyParams: IConfigEngine.InterestRateInputData({
                     optimalUsageRatio: 100,
                     baseVariableBorrowRate: 0,
@@ -262,7 +262,7 @@ contract PrepareReserves is Script {
             listings[0] = IConfigEngine.Listing({
                 asset: 0xE6829d9a7eE3040e1276Fa75293Bde931859e8fA,
                 assetSymbol: "cmETH",
-                priceFeed: 0xB16FcAFB8378baA0a69142a325878FDCad58606A,
+                priceFeed: 0xB45D04937398a071a156593a122e475F00Faa8B6,
                 rateStrategyParams: IConfigEngine.InterestRateInputData({
                     optimalUsageRatio: 100,
                     baseVariableBorrowRate: 0,
@@ -311,7 +311,7 @@ contract PrepareReserves is Script {
             listings[0] = IConfigEngine.Listing({
                 asset: 0xE6829d9a7eE3040e1276Fa75293Bde931859e8fA,
                 assetSymbol: "cmETH",
-                priceFeed: 0xB16FcAFB8378baA0a69142a325878FDCad58606A,
+                priceFeed: 0xB45D04937398a071a156593a122e475F00Faa8B6,
                 rateStrategyParams: IConfigEngine.InterestRateInputData({
                     optimalUsageRatio: 100,
                     baseVariableBorrowRate: 0,
@@ -360,7 +360,7 @@ contract PrepareReserves is Script {
             listings[0] = IConfigEngine.Listing({
                 asset: 0xC96dE26018A54D51c097160568752c4E3BD6C364,
                 assetSymbol: "fBTC",
-                priceFeed: 0x73b15e19b247263D03D7938f1356304b7B330Ff0,
+                priceFeed: 0x6c8c5aDD1d6345580726D69aFc6FE15dFc818fe7,
                 rateStrategyParams: IConfigEngine.InterestRateInputData({
                     optimalUsageRatio: 100,
                     baseVariableBorrowRate: 0,
@@ -409,7 +409,7 @@ contract PrepareReserves is Script {
             listings[0] = IConfigEngine.Listing({
                 asset: 0xC96dE26018A54D51c097160568752c4E3BD6C364,
                 assetSymbol: "fBTC",
-                priceFeed: 0x73b15e19b247263D03D7938f1356304b7B330Ff0,
+                priceFeed: 0x6c8c5aDD1d6345580726D69aFc6FE15dFc818fe7,
                 rateStrategyParams: IConfigEngine.InterestRateInputData({
                     optimalUsageRatio: 100,
                     baseVariableBorrowRate: 0,
@@ -458,7 +458,7 @@ contract PrepareReserves is Script {
             listings[0] = IConfigEngine.Listing({
                 asset: 0xC96dE26018A54D51c097160568752c4E3BD6C364,
                 assetSymbol: "fBTC",
-                priceFeed: 0x73b15e19b247263D03D7938f1356304b7B330Ff0,
+                priceFeed: 0x6c8c5aDD1d6345580726D69aFc6FE15dFc818fe7,
                 rateStrategyParams: IConfigEngine.InterestRateInputData({
                     optimalUsageRatio: 100,
                     baseVariableBorrowRate: 0,
