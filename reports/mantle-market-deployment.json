@@ -24,7 +24,7 @@
       "aToken": "0x9BbF5c80e450A2C02D2c31c1E9d2d3539713a56a",
       "aclManager": "0x9FebC2a28322d0FBE8011f2193b32181D6E0FF24",
       "configEngine": "0x57D8de0cB6b3505e9633c3DB35A057ed4e07a869",
-      "interestRateStrategy": "",
+      "interestRateStrategy": "0xD240F663D4F594D24E344a378C5bD98D6b607352",
       "emissionManager": "0xCb832E5EFC1d6287d9395122799B8ce338FE17E2",
       "oracle": "0x50a2f17F172Db8CC0D347840750d459aCa9A08dd",
       "poolAddressesProvider": "0x1244F36E812776390b3401E2391bDEb330db97fC",
